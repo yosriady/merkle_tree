@@ -21,7 +21,7 @@ defmodule MerkleTree do
 
   defstruct [:blocks, :root, :hash_function]
 
-  @number_of_children 2 # Number of children per node
+  @number_of_children 2 # Number of children per node. Configurable.
 
   @type blocks :: [String.t, ...]
   @type hash_function :: (String.t -> String.t)
@@ -42,7 +42,8 @@ defmodule MerkleTree do
     (String.t -> String.t).
   """
   @spec new(blocks, hash_function) :: t
-  def new(blocks, hash_function \\ &MerkleTree.Crypto.sha256/1) do
+  def new(blocks, hash_function \\ &MerkleTree.Crypto.sha256/1)
+  when blocks != [] do
     unless is_power_of_n(@number_of_children, Enum.count(blocks)), do: raise MerkleTree.ArgumentError
 
     root = build(blocks, hash_function)
@@ -67,11 +68,11 @@ defmodule MerkleTree do
   defp build_tree(nodes, hash_function) do # Recursive case
     children_partitions = Enum.chunk(nodes, @number_of_children)
     parents = Enum.map(children_partitions, fn(partition) ->
-      concatenated_children = partition
+      concatenated_values = partition
         |> Enum.map(&(&1.value))
         |> Enum.reduce("", fn(x, acc) -> acc <> x end)
       %MerkleTree.Node{
-        value: hash_function.(concatenated_children),
+        value: hash_function.(concatenated_values),
         children: partition
       }
     end)
