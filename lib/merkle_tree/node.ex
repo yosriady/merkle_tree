@@ -1,4 +1,8 @@
 defmodule MerkleTree.Node do
+  @moduledoc """
+    This module implements a tree node abstraction.
+  """
+
   defstruct [:value, :children]
 
   @type t :: %MerkleTree.Node{

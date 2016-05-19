@@ -1,4 +1,8 @@
 defmodule MerkleTree.Crypto do
+  @moduledoc """
+    This module defines some cryptographic hash functions used to hash block
+    contents.
+  """
 
   @type algorithm :: :md5 | :sha | :sha224 | :sha256 | :sha384 | :sha512
 

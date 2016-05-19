@@ -21,6 +21,8 @@ defmodule MerkleTree do
 
   defstruct [:blocks, :root, :hash_function]
 
+  @number_of_children 2 # Number of children per node
+
   @type blocks :: [String.t, ...]
   @type hash_function :: (String.t -> String.t)
   @type root :: MerkleTree.Node.t
@@ -41,7 +43,7 @@ defmodule MerkleTree do
   """
   @spec new(blocks, hash_function) :: t
   def new(blocks, hash_function \\ &MerkleTree.Crypto.sha256/1) do
-    unless is_power_of_2(Enum.count(blocks)), do: raise MerkleTree.ArgumentError
+    unless is_power_of_n(@number_of_children, Enum.count(blocks)), do: raise MerkleTree.ArgumentError
 
     root = build(blocks, hash_function)
     %MerkleTree{blocks: blocks, hash_function: hash_function, root: root}
@@ -63,23 +65,26 @@ defmodule MerkleTree do
 
   defp build_tree([root], _), do: root # Base case
   defp build_tree(nodes, hash_function) do # Recursive case
-    children_pairs = Enum.chunk(nodes, 2)
-    parents = Enum.map(children_pairs, fn([left, right] = pair) ->
+    children_partitions = Enum.chunk(nodes, @number_of_children)
+    parents = Enum.map(children_partitions, fn(partition) ->
+      concatenated_children = partition
+        |> Enum.map(&(&1.value))
+        |> Enum.reduce("", fn(x, acc) -> acc <> x end)
       %MerkleTree.Node{
-        value: hash_function.(left.value <> right.value),
-        children: pair
+        value: hash_function.(concatenated_children),
+        children: partition
       }
     end)
     build_tree(parents, hash_function)
   end
 
-  @spec is_power_of_2(pos_integer) :: boolean
-  def is_power_of_2(n) do
-    n |> :math.log2 |> is_integer_float
+  @spec is_power_of_n(pos_integer, pos_integer) :: boolean
+  def is_power_of_n(n, x) do
+    (:math.log2(x)/:math.log2(n)) |> is_integer_float
   end
 
   @spec is_integer_float(float) :: boolean
-  def is_integer_float(n) do
-    (Float.ceil n) == (Float.floor n)
+  def is_integer_float(x) do
+    (Float.ceil x) == (Float.floor x)
   end
 end
