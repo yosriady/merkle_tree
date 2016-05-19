@@ -5,7 +5,7 @@ defmodule MerkleTree do
     Hash trees are useful because they allow efficient and secure verification of
     the contents of large data structures.
 
-    ## Usage Example
+      ## Usage Example
 
       iex> f = MerkleTree.new ['a', 'b', 'c', 'd']
       %MerkleTree{blocks: ['a', 'b', 'c', 'd'], hash_function: &MerkleTree.Crypto.sha256/1,
@@ -33,13 +33,13 @@ defmodule MerkleTree do
   }
 
   @doc """
-    Creates a new merkle tree, given a 2^N number of string blocks and an
+    Creates a new merkle tree, given a `2^N` number of string blocks and an
     optional hash function.
 
-    By default, merkle_tree uses :sha256 from :crypto.
-    Check out MerkleTree.Crypto for other available cryptographic hashes.
+    By default, `merkle_tree` uses ``:sha256` from :crypto.
+    Check out `MerkleTree.Crypto` for other available cryptographic hashes.
     Alternatively, you can supply your own hash function that has the spec
-    (String.t -> String.t).
+    ``(String.t -> String.t)``.
   """
   @spec new(blocks, hash_function) :: t
   def new(blocks, hash_function \\ &MerkleTree.Crypto.sha256/1)
@@ -80,12 +80,12 @@ defmodule MerkleTree do
   end
 
   @spec is_power_of_n(pos_integer, pos_integer) :: boolean
-  def is_power_of_n(n, x) do
+  defp is_power_of_n(n, x) do
     (:math.log2(x)/:math.log2(n)) |> is_integer_float
   end
 
   @spec is_integer_float(float) :: boolean
-  def is_integer_float(x) do
+  defp is_integer_float(x) do
     (Float.ceil x) == (Float.floor x)
   end
 end

@@ -8,6 +8,8 @@
     <title>MerkleTree – merkle_tree v1.0.0</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
+      <link rel="canonical" href="https://hexdocs.pm/merkle_tree/MerkleTree.html" />
+    
     <script src="dist/sidebar_items.js"></script>
   </head>
   <body data-type="modules">
@@ -74,8 +76,9 @@
   with the hash of the labels or values (in case of leaves) of its child nodes.
   Hash trees are useful because they allow efficient and secure verification of
   the contents of large data structures.</p>
-<p>  ## Usage Example</p>
-<pre><code class="iex elixir">iex&gt; f = MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+<pre><code class="elixir">## Usage Example
+
+iex&gt; f = MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
 %MerkleTree{blocks: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], hash_function: &amp;MerkleTree.Crypto.sha256/1,
       root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [],
            value: &quot;ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb&quot;},
@@ -146,22 +149,10 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#is_integer_float/1">is_integer_float(x)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#is_power_of_n/2">is_power_of_n(n, x)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#new/2">new(blocks, hash_function \\ &amp;MerkleTree.Crypto.sha256/1)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Creates a new merkle tree, given a 2^N number of string blocks and an
+    <div class="summary-synopsis"><p>Creates a new merkle tree, given a <code class="inline">2^N</code> number of string blocks and an
   optional hash function</p>
 </div>
   
@@ -229,50 +220,6 @@
 
   </section>
 </div>
-<div class="detail" id="is_integer_float/1">
-  <div class="detail-header">
-    <a href="#is_integer_float/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">is_integer_float(x)</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">is_integer_float(float) :: boolean</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="is_power_of_n/2">
-  <div class="detail-header">
-    <a href="#is_power_of_n/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">is_power_of_n(n, x)</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">is_power_of_n(pos_integer, pos_integer) :: boolean</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
 <div class="detail" id="new/2">
   <div class="detail-header">
     <a href="#new/2" class="detail-link" title="Link to this function">
@@ -294,12 +241,13 @@
     </div>
   
   <section class="docstring">
-    <p>  Creates a new merkle tree, given a 2^N number of string blocks and an
+    <p>  Creates a new merkle tree, given a <code class="inline">2^N</code> number of string blocks and an
   optional hash function.</p>
-<p>  By default, merkle_tree uses :sha256 from :crypto.
-  Check out MerkleTree.Crypto for other available cryptographic hashes.
-  Alternatively, you can supply your own hash function that has the spec
-  (String.t -&gt; String.t).</p>
+<p>  By default, <code class="inline">merkle_tree</code> uses <code class="inline">:sha256` from :crypto.
+  Check out [`MerkleTree.Crypto`](MerkleTree.Crypto.html) for other available cryptographic hashes.
+  Alternatively, you can supply your own hash function that has the spec</code>(String.t -&gt; String.t)``.
+
+</p>
 
   </section>
 </div>

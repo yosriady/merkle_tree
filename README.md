@@ -2,6 +2,9 @@
 
 Merkle Tree implementation in pure Elixir.
 
+### [Hex](http://hex.pm/packages/merkle_tree)
+### [API Documentation](https://hexdocs.pm/merkle_tree/)
+
 ## Installation
 
 Add `merkle_tree` to your list of dependencies in `mix.exs`:
@@ -33,4 +36,43 @@ A hash tree or Merkle tree is a tree in which every non-leaf node is labelled wi
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/MerkleTree1.svg/800px-MerkleTree1.svg.png)
 
-Hash trees can be used to verify any kind of data stored, handled and transferred in and between computers. Currently the main use of hash trees is to make sure that data blocks received from other peers in a peer-to-peer network are received undamaged and unaltered, and even to check that the other peers do not lie and send fake blocks. Suggestions have been made to use hash trees in trusted computing systems.[4] Hash trees are used in the IPFS and ZFS file systems,  BitTorrent protocol, Apache Wave protocol, Git distributed revision control system, the Bitcoin peer-to-peer network, the Ethereum peer-to-peer network, and a number of NoSQL systems like Apache Cassandra and Riak.
+Hash trees can be used to verify any kind of data stored, handled and transferred in and between computers. Currently the main use of hash trees is to make sure that data blocks received from other peers in a peer-to-peer network are received undamaged and unaltered, and even to check that the other peers do not lie and send fake blocks. Suggestions have been made to use hash trees in trusted computing systems. Hash trees are used in the IPFS and ZFS file systems,  BitTorrent protocol, Apache Wave protocol, Git distributed revision control system, the Bitcoin peer-to-peer network, the Ethereum peer-to-peer network, and a number of NoSQL systems like Apache Cassandra and Riak.
+
+## Running Type Checker
+
+```
+mix dialyzer
+```
+
+## Contributing
+
+1. Fork it ( http://github.com/Leventhan/merkle_tree/fork )
+2. Create your feature branch (`git checkout -b feature/my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin feature/my-new-feature`)
+5. Create new Pull Request (Remember to squash your commits!)
+
+> Report any found bugs or errors using [the issue tracker](https://github.com/Leventhan/merkle_tree/issues).
+
+## License
+
+Copyright (c) 2016 Yos Riady
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
