@@ -3,10 +3,11 @@ defmodule MerkleTree.Node do
     This module implements a tree node abstraction.
   """
 
-  defstruct [:value, :children]
+  defstruct [:value, :children, :height]
 
   @type t :: %MerkleTree.Node{
     value: String.t,
     children: [MerkleTree.Node.t],
+    height: non_neg_integer
   }
 end

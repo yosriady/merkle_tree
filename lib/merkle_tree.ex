@@ -9,13 +9,14 @@ defmodule MerkleTree do
 
       iex> f = MerkleTree.new ['a', 'b', 'c', 'd']
       %MerkleTree{blocks: ['a', 'b', 'c', 'd'], hash_function: &MerkleTree.Crypto.sha256/1,
-            root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [],
+            root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
                  value: "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"},
-                %MerkleTree.Node{children: [], value: "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d"}],
+                %MerkleTree.Node{children: [], height: 0, value: "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d"}], height: 1,
                value: "62af5c3cb8da3e4f25061e829ebeea5c7513c54949115b1acc225930a90154da"},
-              %MerkleTree.Node{children: [%MerkleTree.Node{children: [], value: "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6"},
-                %MerkleTree.Node{children: [], value: "18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4"}],
-               value: "d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a"}],
+              %MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
+                 value: "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6"},
+                %MerkleTree.Node{children: [], height: 0, value: "18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4"}], height: 1,
+               value: "d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a"}], height: 2,
              value: "58c89d709329eb37285837b042ab6ff72c7c8f74de0446b091b6a0131c102cfd"}}
   """
 
@@ -55,28 +56,32 @@ defmodule MerkleTree do
   """
   @spec new(blocks, hash_function) :: root
   def build(blocks, hash_function) do
+    starting_height = 0
     leaves = Enum.map(blocks, fn(block) ->
       %MerkleTree.Node{
         value: hash_function.(block),
         children: [],
+        height: starting_height
       }
     end)
-    build_tree(leaves, hash_function)
+    build_tree(leaves, hash_function, starting_height)
   end
 
-  defp build_tree([root], _), do: root # Base case
-  defp build_tree(nodes, hash_function) do # Recursive case
+  defp build_tree([root], _, _), do: root # Base case
+  defp build_tree(nodes, hash_function, previous_height) do # Recursive case
     children_partitions = Enum.chunk(nodes, @number_of_children)
+    height = previous_height + 1
     parents = Enum.map(children_partitions, fn(partition) ->
       concatenated_values = partition
         |> Enum.map(&(&1.value))
         |> Enum.reduce("", fn(x, acc) -> acc <> x end)
       %MerkleTree.Node{
         value: hash_function.(concatenated_values),
-        children: partition
+        children: partition,
+        height: height
       }
     end)
-    build_tree(parents, hash_function)
+    build_tree(parents, hash_function, height)
   end
 
   @spec is_power_of_n(pos_integer, pos_integer) :: boolean

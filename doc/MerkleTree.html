@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>MerkleTree – merkle_tree v1.0.0</title>
+    <title>MerkleTree – merkle_tree v1.1.0</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
       <link rel="canonical" href="https://hexdocs.pm/merkle_tree/MerkleTree.html" />
@@ -30,7 +30,7 @@
         merkle_tree
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.0.0
+        v1.1.0
       </h2>
     </div>
     
@@ -64,7 +64,7 @@
 
 
       <h1>
-        <small class="visible-xs">merkle_tree v1.0.0</small>
+        <small class="visible-xs">merkle_tree v1.1.0</small>
         MerkleTree
         
         
@@ -80,13 +80,14 @@
 
 iex&gt; f = MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
 %MerkleTree{blocks: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], hash_function: &amp;MerkleTree.Crypto.sha256/1,
-      root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [],
+      root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
            value: &quot;ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb&quot;},
-          %MerkleTree.Node{children: [], value: &quot;3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d&quot;}],
+          %MerkleTree.Node{children: [], height: 0, value: &quot;3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d&quot;}], height: 1,
          value: &quot;62af5c3cb8da3e4f25061e829ebeea5c7513c54949115b1acc225930a90154da&quot;},
-        %MerkleTree.Node{children: [%MerkleTree.Node{children: [], value: &quot;2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6&quot;},
-          %MerkleTree.Node{children: [], value: &quot;18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4&quot;}],
-         value: &quot;d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a&quot;}],
+        %MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
+           value: &quot;2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6&quot;},
+          %MerkleTree.Node{children: [], height: 0, value: &quot;18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4&quot;}], height: 1,
+         value: &quot;d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a&quot;}], height: 2,
        value: &quot;58c89d709329eb37285837b042ab6ff72c7c8f74de0446b091b6a0131c102cfd&quot;}}</code></pre>
 
         </section>
