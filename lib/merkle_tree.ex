@@ -37,7 +37,7 @@ defmodule MerkleTree do
     Creates a new merkle tree, given a `2^N` number of string blocks and an
     optional hash function.
 
-    By default, `merkle_tree` uses ``:sha256` from :crypto.
+    By default, `merkle_tree` uses `:sha256` from :crypto.
     Check out `MerkleTree.Crypto` for other available cryptographic hashes.
     Alternatively, you can supply your own hash function that has the spec
     ``(String.t -> String.t)``.

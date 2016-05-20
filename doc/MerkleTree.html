@@ -244,11 +244,10 @@ iex&gt; f = MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
   <section class="docstring">
     <p>  Creates a new merkle tree, given a <code class="inline">2^N</code> number of string blocks and an
   optional hash function.</p>
-<p>  By default, <code class="inline">merkle_tree</code> uses <code class="inline">:sha256` from :crypto.
-  Check out [`MerkleTree.Crypto`](MerkleTree.Crypto.html) for other available cryptographic hashes.
-  Alternatively, you can supply your own hash function that has the spec</code>(String.t -&gt; String.t)``.
-
-</p>
+<p>  By default, <code class="inline">merkle_tree</code> uses <code class="inline">:sha256</code> from :crypto.
+  Check out <a href="MerkleTree.Crypto.html"><code class="inline">MerkleTree.Crypto</code></a> for other available cryptographic hashes.
+  Alternatively, you can supply your own hash function that has the spec
+  <code class="inline">(String.t -&gt; String.t)</code>.</p>
 
   </section>
 </div>
