@@ -64,11 +64,11 @@ defmodule MerkleTree do
         height: starting_height
       }
     end)
-    build_tree(leaves, hash_function, starting_height)
+    _build(leaves, hash_function, starting_height)
   end
 
-  defp build_tree([root], _, _), do: root # Base case
-  defp build_tree(nodes, hash_function, previous_height) do # Recursive case
+  defp _build([root], _, _), do: root # Base case
+  defp _build(nodes, hash_function, previous_height) do # Recursive case
     children_partitions = Enum.chunk(nodes, @number_of_children)
     height = previous_height + 1
     parents = Enum.map(children_partitions, fn(partition) ->
@@ -81,7 +81,7 @@ defmodule MerkleTree do
         height: height
       }
     end)
-    build_tree(parents, hash_function, height)
+    _build(parents, hash_function, height)
   end
 
   @spec is_power_of_n(pos_integer, pos_integer) :: boolean
