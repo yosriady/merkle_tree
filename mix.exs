@@ -30,7 +30,7 @@ defmodule MerkleTree.Mixfile do
      files: ["lib", "mix.exs", "README.md"],
      maintainers: ["Yos Riady"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/Leventhan/merkle_tree",
+     links: %{"GitHub" => "https://github.com/yosriady/merkle_tree",
               "Docs" => "http://hexdocs.pm/merkle_tree/"}
      ]
   end
