@@ -54,7 +54,7 @@ defmodule MerkleTree do
   @doc """
     Builds a new binary merkle tree.
   """
-  @spec new(blocks, hash_function) :: root
+  @spec build(blocks, hash_function) :: root
   def build(blocks, hash_function) do
     starting_height = 0
     leaves = Enum.map(blocks, fn(block) ->
