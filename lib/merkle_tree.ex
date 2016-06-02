@@ -7,7 +7,7 @@ defmodule MerkleTree do
 
       ## Usage Example
 
-      iex> f = MerkleTree.new ['a', 'b', 'c', 'd']
+      iex> MerkleTree.new ['a', 'b', 'c', 'd']
       %MerkleTree{blocks: ['a', 'b', 'c', 'd'], hash_function: &MerkleTree.Crypto.sha256/1,
             root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
                  value: "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"},
