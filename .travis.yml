@@ -1,0 +1,10 @@
+language: elixir
+elixir:
+  - 1.2
+otp_release:
+  - 18.0
+  - 18.3
+after_script:
+  - mix coveralls.travis
+env:
+  - MIX_ENV=test
