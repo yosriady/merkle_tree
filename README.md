@@ -2,8 +2,8 @@
 
 Merkle Tree implementation in pure Elixir.
 
-[![Travis](https://img.shields.io/travisyosriady/merkle_tree.svg?maxAge=2592000)](https://travis-ci.org/yosriady/merkle_tree)
-[![Coveralls](https://img.shields.io/coveralls//yosriady/merkle_tree.svg?maxAge=2592000)](https://coveralls.io/github/yosriady/merkle_tree)
+[![Travis](https://img.shields.io/travis/yosriady/merkle_tree.svg?maxAge=2592000)](https://travis-ci.org/yosriady/merkle_tree)
+[![Coveralls](https://img.shields.io/coveralls/yosriady/merkle_tree.svg?maxAge=2592000)](https://coveralls.io/github/yosriady/merkle_tree)
 [![Hex.pm](https://img.shields.io/hexpm/v/merkle_tree.svg?maxAge=2592000)](https://hex.pm/packages/merkle_tree)
 
 ### [API Documentation](https://hexdocs.pm/merkle_tree/)
