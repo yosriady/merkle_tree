@@ -3,3 +3,5 @@ elixir:
   - 1.2
 otp_release:
   - 18.3
+after_script:
+  - MIX_ENV=test mix do compile, coveralls.travis
