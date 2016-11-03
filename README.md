@@ -13,7 +13,7 @@ Merkle Tree implementation in pure Elixir.
 
 Add `merkle_tree` to your list of dependencies in `mix.exs`:
 
-```
+```elixir
 def deps do
   [{:merkle_tree, "~> 1.0.0"}]
 end
@@ -21,7 +21,7 @@ end
 
 ## Usage
 
-```
+```elixir
 iex> f = MerkleTree.new ['a', 'b', 'c', 'd']
 %MerkleTree{blocks: ['a', 'b', 'c', 'd'], hash_function: &MerkleTree.Crypto.sha256/1,
       root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [],
