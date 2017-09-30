@@ -3,8 +3,8 @@ defmodule MerkleTree.Proof do
     Generate and verify merkle proofs
 
       ## Usage Example
-      iex(2)> proof = MerkleTree.new(~w/a b c d/) |>
-      ...(2)> MerkleTree.Proof.prove(1)
+      iex> proof = MerkleTree.new(~w/a b c d/) |>
+      ...> MerkleTree.Proof.prove(1)
       %MerkleTree.Proof{hash_function: &MerkleTree.Crypto.sha256/1,
        hashes: ["d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a",
         "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"]}
