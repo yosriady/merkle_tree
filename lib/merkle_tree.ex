@@ -32,7 +32,6 @@ defmodule MerkleTree do
     root: root,
     hash_function: hash_function
   }
-  @type proof :: {[String.t, ...], hash_function}
 
   @doc """
     Creates a new merkle tree, given a `2^N` number of string blocks and an
@@ -95,49 +94,4 @@ defmodule MerkleTree do
     (Float.ceil x) == (Float.floor x)
   end
 
-  defp binarize(index, height) do
-    <<index_binary::binary-unit(1)>> = <<index::unsigned-big-integer-size(height)>>
-    index_binary
-  end
-  defp path_from_binary(index_binary) do
-    <<path_head::unsigned-big-integer-unit(1)-size(1),
-    path_tail::binary-unit(1)>> = index_binary
-    {path_head, path_tail}
-  end
-
-  def prove(%MerkleTree{root: %MerkleTree.Node{height: height} = root} = tree,
-            index) do
-    {_prove(root, binarize(index, height)), tree.hash_function}
-  end
-
-  defp _prove(_, ""), do: []
-  defp _prove(%MerkleTree.Node{children: children},
-              index_binary) do
-    {path_head, path_tail} = path_from_binary(index_binary)
-    [child, sibling] = case path_head do
-      1 -> Enum.reverse(children)
-      0 -> children
-    end
-    [sibling.value] ++ _prove(child, path_tail)
-  end
-
-  def proven?({block, index}, root_hash, {proof, hash_function}) do
-    height = length(proof)
-    root_hash == hash_proof(block, binarize(index, height), proof, hash_function)
-  end
-
-  defp hash_proof(block, "", [], hash_function) do
-    hash_function.(block)
-  end
-  defp hash_proof(block, index_binary, [proof_head | proof_tail], hash_function) do
-    {path_head, path_tail} = path_from_binary(index_binary)
-    case path_head do
-      1 -> hash_function.(
-        proof_head <> hash_proof(block, path_tail, proof_tail, hash_function)
-      )
-      0 -> hash_function.(
-        hash_proof(block, path_tail, proof_tail, hash_function) <> proof_head
-      )
-    end
-  end
 end
