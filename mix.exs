@@ -17,7 +17,7 @@ defmodule MerkleTree.Mixfile do
   #
   # Type "mix help compile.app" for more information
 
-  defp description do
+  defp description() do
     """
     A hash tree or Merkle tree is a tree in which every non-leaf node is labelled
     with the hash of the labels or values (in case of leaves) of its child nodes.
@@ -26,7 +26,7 @@ defmodule MerkleTree.Mixfile do
     """
   end
 
-  defp package do
+  defp package() do
     [
      files: ["lib", "mix.exs", "README.md"],
      maintainers: ["Yos Riady"],
@@ -50,7 +50,7 @@ defmodule MerkleTree.Mixfile do
   #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
   #
   # Type "mix help deps" for more examples and options
-  defp deps do
+  defp deps() do
     [{:ex_doc, "~> 0.11", only: :dev},
      {:earmark, "~> 0.1", only: :dev},
      {:dialyxir, "~> 0.3", only: :dev},
