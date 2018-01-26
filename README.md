@@ -15,7 +15,7 @@ Add `merkle_tree` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:merkle_tree, "~> 1.0.0"}]
+  [{:merkle_tree, "~> 1.1.1"}]
 end
 ```
 
