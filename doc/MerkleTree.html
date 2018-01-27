@@ -8,8 +8,6 @@
     <title>MerkleTree – merkle_tree v1.1.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
-      <link rel="canonical" href="https://hexdocs.pm/merkle_tree/MerkleTree.html" />
-    
     <script src="dist/sidebar_items.js"></script>
   </head>
   <body data-type="modules">
@@ -78,7 +76,7 @@
   the contents of large data structures.</p>
 <pre><code class="elixir">## Usage Example
 
-iex&gt; f = MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+iex&gt; MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
 %MerkleTree{blocks: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], hash_function: &amp;MerkleTree.Crypto.sha256/1,
       root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
            value: &quot;ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb&quot;},

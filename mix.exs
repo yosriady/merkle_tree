@@ -3,7 +3,7 @@ defmodule MerkleTree.Mixfile do
 
   def project do
     [app: :merkle_tree,
-     version: "1.1.1",
+     version: "1.2.1",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
