@@ -16,6 +16,7 @@ defmodule MerkleTree.Proof do
 
   @type t :: %MerkleTree.Proof{
     hashes: [String.t, ...],
+    # TODO: remove when deprecated MerkleTree.Proof.proven?/3 support ends
     hash_function: MerkleTree.hash_function
   }
 
@@ -27,6 +28,7 @@ defmodule MerkleTree.Proof do
             index) do
     %MerkleTree.Proof{
       hashes: _prove(root, binarize(index, height)),
+      # TODO: remove when deprecated MerkleTree.Proof.proven?/3 support ends
       hash_function: tree.hash_function
     }
   end
@@ -45,9 +47,19 @@ defmodule MerkleTree.Proof do
   @doc """
   Verifies proof for a block at a specific index
   """
-  @spec proven?({String.t, non_neg_integer}, String.t, t) :: boolean
+  @spec proven?({String.t, non_neg_integer}, String.t, MerkleTree.hash_function, t) :: boolean
+  def proven?({block, index}, root_hash, hash_function,
+              %MerkleTree.Proof{hashes: proof}) do
+    height = length(proof)
+    root_hash == _hash_proof(block, binarize(index, height), proof, hash_function)
+  end
+
+  @doc false
+  # TODO: remove when deprecated MerkleTree.Proof.proven?/3 support ends
   def proven?({block, index}, root_hash,
               %MerkleTree.Proof{hashes: proof, hash_function: hash_function}) do
+    IO.warn "MerkleTree.Proof.proven?/3 is deprecated. " <>
+            "Use MerkleTree.Proof.proven?/4 instead."
     height = length(proof)
     root_hash == _hash_proof(block, binarize(index, height), proof, hash_function)
   end
