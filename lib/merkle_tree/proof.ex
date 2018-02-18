@@ -55,11 +55,10 @@ defmodule MerkleTree.Proof do
   end
 
   @doc false
+  @deprecated "Use proven?/4 instead"
   # TODO: remove when deprecated MerkleTree.Proof.proven?/3 support ends
   def proven?({block, index}, root_hash,
               %MerkleTree.Proof{hashes: proof, hash_function: hash_function}) do
-    IO.warn "MerkleTree.Proof.proven?/3 is deprecated. " <>
-            "Use MerkleTree.Proof.proven?/4 instead."
     height = length(proof)
     root_hash == _hash_proof(block, binarize(index, height), proof, hash_function)
   end
