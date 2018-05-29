@@ -81,11 +81,11 @@ Merkle Tree implementation in pure Elixir.
   iex> MerkleTree.Crypto.__info__(:functions) 
   [hash: 2, sha256: 1]
   iex> MerkleTree.Crypto.hash("tendermint", :sha256) 
-"f6c3848fc2ab9188dd2c563828019be7cee4e269f5438c19f5173f79898e9ee6"
+  "f6c3848fc2ab9188dd2c563828019be7cee4e269f5438c19f5173f79898e9ee6"
   iex> MerkleTree.Crypto.hash("tendermint", :md5)   
-"bc93700bdf1d47ad28654ad93611941f"
+  "bc93700bdf1d47ad28654ad93611941f"
   iex> MerkleTree.Crypto.sha256("tendermint")    
-"f6c3848fc2ab9188dd2c563828019be7cee4e269f5438c19f5173f79898e9ee6"
+  "f6c3848fc2ab9188dd2c563828019be7cee4e269f5438c19f5173f79898e9ee6"
   ```
 
 ## Background
