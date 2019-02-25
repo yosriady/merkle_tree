@@ -34,20 +34,43 @@ defmodule MerkleTree do
   }
 
   @doc """
-    Creates a new merkle tree, given a `2^N` number of string blocks and an
-    optional hash function.
-
-    By default, `merkle_tree` uses `:sha256` from :crypto.
-    Check out `MerkleTree.Crypto` for other available cryptographic hashes.
-    Alternatively, you can supply your own hash function that has the spec
-    ``(String.t -> String.t)``.
+    Creates a new merkle tree.
+  given a blocks and hash function or opts
+     available options:
+      :hash_function - used hash in mercle tree default :sha256 from :cryto
+      :hash_leaf - flag says if the leafs should be hash, default true
+      :height - expected merkle tree height
+      :default_data_block - block will be extended by copy of this data
+  Check out `MerkleTree.Crypto` for other available cryptographic hashes.
+  Alternatively, you can supply your own hash function that has the spec
+  ``(String.t -> String.t)``.
   """
-  @spec new(blocks, hash_function) :: t
-  def new(blocks, hash_function \\ &MerkleTree.Crypto.sha256/1)
-  when blocks != [] do
-    unless is_power_of_n(@number_of_children, Enum.count(blocks)), do: raise MerkleTree.ArgumentError
+  @spec new(blocks, hash_function | keyword()) :: t
 
-    root = build(blocks, hash_function)
+  def new(blocks, hash_function) when is_function(hash_function),
+    do: new(blocks, hash_function: hash_function)
+
+  def new(blocks, opts \\ []) when is_list(opts) do
+    hash_function = Keyword.get(opts, :hash_function, &MerkleTree.Crypto.sha256/1)
+
+    blocks =
+      fill_blocks(blocks, Keyword.get(opts, :default_data_block), Keyword.get(opts, :height))
+
+    leafs =
+      if Keyword.get(opts, :hash_leaf, true),
+        do: Enum.map(blocks, hash_function),
+        else: blocks
+
+    nodes =
+      Enum.map(leafs, fn block ->
+        %MerkleTree.Node{
+          value: block,
+          children: [],
+          height: 0
+        }
+      end)
+
+    root = _build(nodes, hash_function, 0)
     %MerkleTree{blocks: blocks, hash_function: hash_function, root: root}
   end
 
@@ -84,14 +107,25 @@ defmodule MerkleTree do
     _build(parents, hash_function, height)
   end
 
-  @spec is_power_of_n(pos_integer, pos_integer) :: boolean
-  defp is_power_of_n(n, x) do
-    (:math.log2(x)/:math.log2(n)) |> is_integer_float
+  defp fill_blocks(blocks, default, nil) when default != nil do
+    amout_elements = Enum.count(blocks)
+    expected_amout = :math.pow(2, :math.ceil(:math.log2(amout_elements)))
+    blocks ++ List.duplicate(default, trunc(expected_amout - amout_elements))
   end
 
-  @spec is_integer_float(float) :: boolean
-  defp is_integer_float(x) do
-    (Float.ceil x) == (Float.floor x)
+  defp fill_blocks(blocks, default, height) when default != nil do
+    amout_elements = Enum.count(blocks)
+    expected_amout = :math.pow(2, height)
+    fill_elements = expected_amout - amout_elements
+    if fill_elements < 0, do: raise(MerkleTree.ArgumentError)
+    blocks ++ List.duplicate(default, trunc(expected_amout - amout_elements))
   end
 
+  defp fill_blocks(blocks, _, _) when blocks != [] do
+    amout_elements = Enum.count(blocks)
+
+    if :math.pow(2, :math.ceil(:math.log2(amout_elements))) != amout_elements,
+      do: raise(MerkleTree.ArgumentError),
+      else: blocks
+  end
 end
