@@ -109,9 +109,11 @@ defmodule MerkleTree do
     _build(parents, hash_function, height)
   end
 
+  defp _ceil(a), do: if(a > trunc(a), do: trunc(a) + 1, else: trunc(a))
+
   defp fill_blocks(blocks, default, nil) when default != nil do
     blocks_count = Enum.count(blocks)
-    leaves_count = :math.pow(2, :math.ceil(:math.log2(blocks_count)))
+    leaves_count = :math.pow(2, _ceil(:math.log2(blocks_count)))
     blocks ++ List.duplicate(default, trunc(leaves_count - blocks_count))
   end
 
@@ -125,7 +127,7 @@ defmodule MerkleTree do
 
   defp fill_blocks(blocks, _, _) when blocks != [] do
     amout_elements = Enum.count(blocks)
-    required_leaves_count = :math.pow(2, :math.ceil(:math.log2(amout_elements)))
+    required_leaves_count = :math.pow(2, _ceil(:math.log2(amout_elements)))
     if required_leaves_count != amout_elements,
       do: raise(MerkleTree.ArgumentError),
       else: blocks
