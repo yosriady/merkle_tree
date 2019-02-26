@@ -38,14 +38,16 @@ defmodule MerkleTree do
   given a blocks and hash function or opts
      available options:
       :hash_function - used hash in mercle tree default :sha256 from :cryto
-      :hash_leaf - flag says if the leafs should be hash, default true
-      :height - expected merkle tree height
-      :default_data_block - block will be extended by copy of this data
+      :hash_leaves - flag says whether the leaves should be hashed, default true
+      :height - allows to construct tree of provided height, 
+          empty leaves data will be taken from `:default_data_block` parameter
+      :default_data_block - this data will be used to supply empty 
+          leaves in case where there isn't enough blocks provided
   Check out `MerkleTree.Crypto` for other available cryptographic hashes.
   Alternatively, you can supply your own hash function that has the spec
   ``(String.t -> String.t)``.
   """
-  @spec new(blocks, hash_function | keyword()) :: t
+  @spec new(blocks, hash_function | list({atom, any})) :: t
 
   def new(blocks, hash_function) when is_function(hash_function),
     do: new(blocks, hash_function: hash_function)
@@ -56,13 +58,13 @@ defmodule MerkleTree do
     blocks =
       fill_blocks(blocks, Keyword.get(opts, :default_data_block), Keyword.get(opts, :height))
 
-    leafs =
+    leaves =
       if Keyword.get(opts, :hash_leaf, true),
         do: Enum.map(blocks, hash_function),
         else: blocks
 
     nodes =
-      Enum.map(leafs, fn block ->
+      Enum.map(leaves, fn block ->
         %MerkleTree.Node{
           value: block,
           children: [],
@@ -108,23 +110,23 @@ defmodule MerkleTree do
   end
 
   defp fill_blocks(blocks, default, nil) when default != nil do
-    amout_elements = Enum.count(blocks)
-    expected_amout = :math.pow(2, :math.ceil(:math.log2(amout_elements)))
-    blocks ++ List.duplicate(default, trunc(expected_amout - amout_elements))
+    blocks_count = Enum.count(blocks)
+    leaves_count = :math.pow(2, :math.ceil(:math.log2(blocks_count)))
+    blocks ++ List.duplicate(default, trunc(leaves_count - blocks_count))
   end
 
   defp fill_blocks(blocks, default, height) when default != nil do
-    amout_elements = Enum.count(blocks)
-    expected_amout = :math.pow(2, height)
-    fill_elements = expected_amout - amout_elements
+    blocks_count = Enum.count(blocks)
+    leaves_count = :math.pow(2, height)
+    fill_elements = leaves_count - blocks_count
     if fill_elements < 0, do: raise(MerkleTree.ArgumentError)
-    blocks ++ List.duplicate(default, trunc(expected_amout - amout_elements))
+    blocks ++ List.duplicate(default, trunc(fill_elements))
   end
 
   defp fill_blocks(blocks, _, _) when blocks != [] do
     amout_elements = Enum.count(blocks)
-
-    if :math.pow(2, :math.ceil(:math.log2(amout_elements))) != amout_elements,
+    required_leaves_count = :math.pow(2, :math.ceil(:math.log2(amout_elements)))
+    if required_leaves_count != amout_elements,
       do: raise(MerkleTree.ArgumentError),
       else: blocks
   end
