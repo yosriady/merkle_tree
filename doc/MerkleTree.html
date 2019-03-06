@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>MerkleTree – merkle_tree v1.3.0</title>
+    <title>MerkleTree – merkle_tree v1.5.0</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
       <link rel="canonical" href="https://hexdocs.pm/merkle_tree/MerkleTree.html" />
@@ -30,7 +30,7 @@
         merkle_tree
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.3.0
+        v1.5.0
       </h2>
     </div>
     
@@ -64,7 +64,7 @@
 
 
       <h1>
-        <small class="visible-xs">merkle_tree v1.3.0</small>
+        <small class="visible-xs">merkle_tree v1.5.0</small>
         MerkleTree
         
         
@@ -150,11 +150,21 @@ iex&gt; MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#new/2">new(blocks, hash_function \\ &amp;MerkleTree.Crypto.sha256/1)</a>
+    <a href="#new/2">new(blocks, hash_function)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Creates a new merkle tree, given a <code class="inline">2^N</code> number of string blocks and an
-  optional hash function</p>
+    <div class="summary-synopsis"><p>Creates a new merkle tree.
+given a blocks and hash function or opts
+   available options:</p>
+<pre><code class="elixir">:hash_function - used hash in mercle tree default :sha256 from :cryto
+:hash_leaves - flag says whether the leaves should be hashed, default true
+:height - allows to construct tree of provided height,
+    empty leaves data will be taken from `:default_data_block` parameter
+:default_data_block - this data will be used to supply empty
+    leaves in case where there isn&#39;t enough blocks provided</code></pre>
+<p>Check out <a href="MerkleTree.Crypto.html"><code class="inline">MerkleTree.Crypto</code></a> for other available cryptographic hashes.
+Alternatively, you can supply your own hash function that has the spec
+<code class="inline">(String.t -&gt; String.t)</code></p>
 </div>
   
 </div>
@@ -235,7 +245,7 @@ iex&gt; MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
     <a href="#new/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">new(blocks, hash_function \\ &amp;MerkleTree.Crypto.sha256/1)</span>
+    <span class="signature">new(blocks, hash_function)</span>
       
   </div>
   
@@ -243,18 +253,24 @@ iex&gt; MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">new(<a href="#t:blocks/0">blocks</a>, <a href="#t:hash_function/0">hash_function</a>) :: <a href="#t:t/0">t</a></code></pre>
+          <pre><code class="elixir">new(<a href="#t:blocks/0">blocks</a>, <a href="#t:hash_function/0">hash_function</a> | [{atom, any}]) :: <a href="#t:t/0">t</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>  Creates a new merkle tree, given a <code class="inline">2^N</code> number of string blocks and an
-  optional hash function.</p>
-<p>  By default, <code class="inline">merkle_tree</code> uses <code class="inline">:sha256</code> from :crypto.
-  Check out <a href="MerkleTree.Crypto.html"><code class="inline">MerkleTree.Crypto</code></a> for other available cryptographic hashes.
-  Alternatively, you can supply your own hash function that has the spec
-  <code class="inline">(String.t -&gt; String.t)</code>.</p>
+    <p>  Creates a new merkle tree.
+given a blocks and hash function or opts
+   available options:</p>
+<pre><code class="elixir">:hash_function - used hash in mercle tree default :sha256 from :cryto
+:hash_leaves - flag says whether the leaves should be hashed, default true
+:height - allows to construct tree of provided height,
+    empty leaves data will be taken from `:default_data_block` parameter
+:default_data_block - this data will be used to supply empty
+    leaves in case where there isn&#39;t enough blocks provided</code></pre>
+<p>Check out <a href="MerkleTree.Crypto.html"><code class="inline">MerkleTree.Crypto</code></a> for other available cryptographic hashes.
+Alternatively, you can supply your own hash function that has the spec
+<code class="inline">(String.t -&gt; String.t)</code>.</p>
 
   </section>
 </div>
