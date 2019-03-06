@@ -39,9 +39,9 @@ defmodule MerkleTree do
      available options:
       :hash_function - used hash in mercle tree default :sha256 from :cryto
       :hash_leaves - flag says whether the leaves should be hashed, default true
-      :height - allows to construct tree of provided height, 
+      :height - allows to construct tree of provided height,
           empty leaves data will be taken from `:default_data_block` parameter
-      :default_data_block - this data will be used to supply empty 
+      :default_data_block - this data will be used to supply empty
           leaves in case where there isn't enough blocks provided
   Check out `MerkleTree.Crypto` for other available cryptographic hashes.
   Alternatively, you can supply your own hash function that has the spec
@@ -59,7 +59,7 @@ defmodule MerkleTree do
       fill_blocks(blocks, Keyword.get(opts, :default_data_block), Keyword.get(opts, :height))
 
     leaves =
-      if Keyword.get(opts, :hash_leaf, true),
+      if Keyword.get(opts, :hash_leaves, true),
         do: Enum.map(blocks, hash_function),
         else: blocks
 
