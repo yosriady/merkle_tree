@@ -29,7 +29,7 @@ defmodule MerkleTreeTest do
     blocks = ['a', 'a', 'a', 'a']
 
     assert MerkleTree.new(blocks).root ==
-             MerkleTree.new(blocks |> Enum.map(&MerkleTree.Crypto.sha256/1), hash_leaf: false).root
+             MerkleTree.new(blocks |> Enum.map(&MerkleTree.Crypto.sha256/1), hash_leaves: false).root
   end
 
   test "default hash function sha256" do
