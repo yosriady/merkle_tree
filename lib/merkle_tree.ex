@@ -22,20 +22,20 @@ defmodule MerkleTree do
 
   defstruct [:blocks, :root, :hash_function]
 
-  @number_of_children 2 # Number of children per node. Configurable.
+  # Number of children per node. Configurable.
+  @number_of_children 2
 
-  @type blocks :: [String.t, ...]
-  @type hash_function :: (String.t -> String.t)
-  @type root :: MerkleTree.Node.t
+  @type blocks :: [String.t(), ...]
+  @type hash_function :: (String.t() -> String.t())
+  @type root :: MerkleTree.Node.t()
   @type t :: %MerkleTree{
-    blocks: blocks,
-    root: root,
-    hash_function: hash_function
-  }
+          blocks: blocks,
+          root: root,
+          hash_function: hash_function
+        }
 
   @doc """
-    Creates a new merkle tree.
-  given a blocks and hash function or opts
+    Creates a new merkle tree, given a blocks and hash function or opts
      available options:
       :hash_function - used hash in mercle tree default :sha256 from :cryto
       :hash_leaves - flag says whether the leaves should be hashed, default true
@@ -55,8 +55,7 @@ defmodule MerkleTree do
   def new(blocks, opts \\ []) when is_list(opts) do
     hash_function = Keyword.get(opts, :hash_function, &MerkleTree.Crypto.sha256/1)
 
-    blocks =
-      fill_blocks(blocks, Keyword.get(opts, :default_data_block), Keyword.get(opts, :height))
+    blocks = fill_blocks(blocks, Keyword.get(opts, :default_data_block), Keyword.get(opts, :height))
 
     leaves =
       if Keyword.get(opts, :hash_leaves, true),
@@ -82,30 +81,40 @@ defmodule MerkleTree do
   @spec build(blocks, hash_function) :: root
   def build(blocks, hash_function) do
     starting_height = 0
-    leaves = Enum.map(blocks, fn(block) ->
-      %MerkleTree.Node{
-        value: hash_function.(block),
-        children: [],
-        height: starting_height
-      }
-    end)
+
+    leaves =
+      Enum.map(blocks, fn block ->
+        %MerkleTree.Node{
+          value: hash_function.(block),
+          children: [],
+          height: starting_height
+        }
+      end)
+
     _build(leaves, hash_function, starting_height)
   end
 
-  defp _build([root], _, _), do: root # Base case
-  defp _build(nodes, hash_function, previous_height) do # Recursive case
+  # Base case
+  defp _build([root], _, _), do: root
+  # Recursive case
+  defp _build(nodes, hash_function, previous_height) do
     children_partitions = Enum.chunk(nodes, @number_of_children)
     height = previous_height + 1
-    parents = Enum.map(children_partitions, fn(partition) ->
-      concatenated_values = partition
-        |> Enum.map(&(&1.value))
-        |> Enum.reduce("", fn(x, acc) -> acc <> x end)
-      %MerkleTree.Node{
-        value: hash_function.(concatenated_values),
-        children: partition,
-        height: height
-      }
-    end)
+
+    parents =
+      Enum.map(children_partitions, fn partition ->
+        concatenated_values =
+          partition
+          |> Enum.map(& &1.value)
+          |> Enum.reduce("", fn x, acc -> acc <> x end)
+
+        %MerkleTree.Node{
+          value: hash_function.(concatenated_values),
+          children: partition,
+          height: height
+        }
+      end)
+
     _build(parents, hash_function, height)
   end
 
@@ -128,6 +137,7 @@ defmodule MerkleTree do
   defp fill_blocks(blocks, _, _) when blocks != [] do
     amout_elements = Enum.count(blocks)
     required_leaves_count = :math.pow(2, _ceil(:math.log2(amout_elements)))
+
     if required_leaves_count != amout_elements,
       do: raise(MerkleTree.ArgumentError),
       else: blocks

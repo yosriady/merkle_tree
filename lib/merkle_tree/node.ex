@@ -6,8 +6,8 @@ defmodule MerkleTree.Node do
   defstruct [:value, :children, :height]
 
   @type t :: %__MODULE__{
-    value: String.t,
-    children: [MerkleTree.Node.t],
-    height: non_neg_integer
-  }
+          value: String.t(),
+          children: [MerkleTree.Node.t()],
+          height: non_neg_integer
+        }
 end
