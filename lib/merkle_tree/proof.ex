@@ -23,17 +23,13 @@ defmodule MerkleTree.Proof do
   @doc """
   Generates proof for a block at a specific index
   """
-  @spec prove(MerkleTree.t(), non_neg_integer) :: t
-  def prove(
-        %MerkleTree{root: %MerkleTree.Node{height: height} = root} = tree,
-        index
-      ) do
-    %MerkleTree.Proof{
-      hashes: _prove(root, binarize(index, height)),
-      # TODO: remove when deprecated MerkleTree.Proof.proven?/3 support ends
-      hash_function: tree.hash_function
-    }
-  end
+  @spec prove(MerkleTree.t() | MerkleTree.Node.t(), non_neg_integer) :: t
+  def prove(%MerkleTree{root: root} = tree, index),
+    # TODO: remove the struct update with hash function, when deprecated MerkleTree.Proof.proven?/3 support ends
+    do: %MerkleTree.Proof{prove(root, index) | hash_function: tree.hash_function}
+
+  def prove(%MerkleTree.Node{height: height} = root, index),
+    do: %MerkleTree.Proof{hashes: _prove(root, binarize(index, height))}
 
   defp _prove(_, ""), do: []
 
