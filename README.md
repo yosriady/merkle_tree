@@ -18,10 +18,10 @@ Merkle Tree implementation in pure Elixir.
   mix new my_app; cd my_app
   ```
 
-* Add `merkle_tree` to your list of dependencies in `mix.exs`. Note that merkle_tree v1.2.0 is required in order to use `MerkleTree.Proof`.
+* Add `merkle_tree` to your list of dependencies in `mix.exs`.
   ```elixir
   def deps do
-    [{:merkle_tree, "~> 1.2.0"}]
+    [{:merkle_tree, "~> 1.6.0"}]
   end
   ```
 
@@ -52,7 +52,7 @@ Merkle Tree implementation in pure Elixir.
           value: "d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a"}],
         value: "58c89d709329eb37285837b042ab6ff72c7c8f74de0446b091b6a0131c102cfd"}}
   $ mt.blocks()
-  ['a', 'b', 'c', 'd'] 
+  ['a', 'b', 'c', 'd']
   $ mt.hash_function()
   &MerkleTree.Crypto.sha256/1
   $ mt.root()
@@ -78,9 +78,9 @@ Merkle Tree implementation in pure Elixir.
 
 * Try the [MerkleTree.Crypto Module](https://hexdocs.pm/merkle_tree/MerkleTree.Crypto.html)
   ```elixir
-  iex> MerkleTree.Crypto.__info__(:functions) 
+  iex> MerkleTree.Crypto.__info__(:functions)
   [hash: 2, sha256: 1]
-  iex> MerkleTree.Crypto.hash("tendermint", :sha256) 
+  iex> MerkleTree.Crypto.hash("tendermint", :sha256)
   "f6c3848fc2ab9188dd2c563828019be7cee4e269f5438c19f5173f79898e9ee6"
   iex> MerkleTree.Crypto.hash("tendermint", :md5)   
   "bc93700bdf1d47ad28654ad93611941f"
