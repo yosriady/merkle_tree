@@ -68,7 +68,7 @@ defmodule MerkleTree do
 
   See `new/2` for a rundown of options
   """
-  @spec fast_root(blocks, Keyword.t()) :: root
+  @spec fast_root(blocks, Keyword.t()) :: MerkleTree.Node.hash()
   def fast_root(blocks, opts \\ []) do
     {hash_function, height, hash_leaves?, default_data_block} = get_from_options(opts, blocks)
 
@@ -115,7 +115,7 @@ defmodule MerkleTree do
 
   See `new/2` for a rundown of options
   """
-  @spec build(blocks, hash_function) :: root
+  @spec build(blocks, hash_function | Keyword.t()) :: root
   def build(blocks, hash_function_or_opts \\ [])
 
   def build(blocks, hash_function) when is_function(hash_function),

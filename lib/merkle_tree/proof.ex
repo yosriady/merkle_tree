@@ -17,7 +17,7 @@ defmodule MerkleTree.Proof do
   @type t :: %MerkleTree.Proof{
           hashes: [String.t(), ...],
           # TODO: remove when deprecated MerkleTree.Proof.proven?/3 support ends
-          hash_function: MerkleTree.hash_function()
+          hash_function: MerkleTree.hash_function() | nil
         }
 
   @doc """
@@ -78,13 +78,13 @@ defmodule MerkleTree.Proof do
     end
   end
 
-  @spec binarize(integer, integer) :: binary
+  @spec binarize(integer, integer) :: bitstring
   defp binarize(index, height) do
     <<index_binary::binary-unit(1)>> = <<index::unsigned-big-integer-size(height)>>
     index_binary
   end
 
-  @spec path_from_binary(binary) :: {binary, binary}
+  @spec path_from_binary(bitstring) :: {0 | 1, bitstring}
   defp path_from_binary(index_binary) do
     <<path_head::unsigned-big-integer-unit(1)-size(1), path_tail::binary-unit(1)>> = index_binary
     {path_head, path_tail}

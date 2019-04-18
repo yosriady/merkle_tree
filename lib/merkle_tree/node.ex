@@ -5,8 +5,10 @@ defmodule MerkleTree.Node do
 
   defstruct [:value, :children, :height]
 
+  @type hash :: binary() | String.t()
+
   @type t :: %__MODULE__{
-          value: String.t(),
+          value: hash(),
           children: [MerkleTree.Node.t()],
           height: non_neg_integer
         }
