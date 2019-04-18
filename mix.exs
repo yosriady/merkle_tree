@@ -2,15 +2,17 @@ defmodule MerkleTree.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :merkle_tree,
-     version: "1.5.0",
-     elixir: "~> 1.2",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     description: description(),
-     package: package(),
-     deps: deps(),
-     test_coverage: [tool: ExCoveralls]]
+    [
+      app: :merkle_tree,
+      version: "1.5.0",
+      elixir: "~> 1.2",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      description: description(),
+      package: package(),
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls]
+    ]
   end
 
   # Configuration for the OTP application
@@ -28,14 +30,12 @@ defmodule MerkleTree.Mixfile do
 
   defp package() do
     [
-     files: ["lib", "mix.exs", "README.md"],
-     maintainers: ["Yos Riady"],
-     licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/yosriady/merkle_tree",
-              "Docs" => "http://hexdocs.pm/merkle_tree/"}
-     ]
+      files: ["lib", "mix.exs", "README.md"],
+      maintainers: ["Yos Riady"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/yosriady/merkle_tree", "Docs" => "http://hexdocs.pm/merkle_tree/"}
+    ]
   end
-
 
   def application do
     [applications: [:logger]]
@@ -51,9 +51,11 @@ defmodule MerkleTree.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps() do
-    [{:ex_doc, "~> 0.11", only: :dev},
-     {:earmark, "~> 0.1", only: :dev},
-     {:dialyxir, "~> 0.3", only: :dev},
-     {:excoveralls, "~> 0.5", only: :test}]
+    [
+      {:ex_doc, "~> 0.11", only: :dev},
+      {:earmark, "~> 0.1", only: :dev},
+      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.5", only: :test}
+    ]
   end
 end
