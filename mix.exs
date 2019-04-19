@@ -5,7 +5,7 @@ defmodule MerkleTree.Mixfile do
     [
       app: :merkle_tree,
       version: "1.6.0",
-      elixir: "~> 1.2",
+      elixir: "~> 1.6",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       description: description(),
