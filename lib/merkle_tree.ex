@@ -7,23 +7,57 @@ defmodule MerkleTree do
 
       ## Usage Example
 
-      iex> MerkleTree.new ['a', 'b', 'c', 'd']
-      %MerkleTree{blocks: ['a', 'b', 'c', 'd'], hash_function: &MerkleTree.Crypto.sha256/1,
-            root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
-                 value: "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"},
-                %MerkleTree.Node{children: [], height: 0, value: "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d"}], height: 1,
-               value: "62af5c3cb8da3e4f25061e829ebeea5c7513c54949115b1acc225930a90154da"},
-              %MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
-                 value: "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6"},
-                %MerkleTree.Node{children: [], height: 0, value: "18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4"}], height: 1,
-               value: "d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a"}], height: 2,
-             value: "58c89d709329eb37285837b042ab6ff72c7c8f74de0446b091b6a0131c102cfd"}}
+    iex> MerkleTree.new ["a", "b", "c", "d"]
+    %MerkleTree{
+      blocks: ["a", "b", "c", "d"],
+      hash_function: &MerkleTree.Crypto.sha256/1,
+      root: %MerkleTree.Node{
+        children: [
+          %MerkleTree.Node{
+            children: [
+              %MerkleTree.Node{
+                children: [],
+                height: 0,
+                value: "022a6979e6dab7aa5ae4c3e5e45f7e977112a7e63593820dbec1ec738a24f93c"
+              },
+              %MerkleTree.Node{
+                children: [],
+                height: 0,
+                value: "57eb35615d47f34ec714cacdf5fd74608a5e8e102724e80b24b287c0c27b6a31"
+              }
+            ],
+            height: 1,
+            value: "4c64254e6636add7f281ff49278beceb26378bd0021d1809974994e6e233ec35"
+          },
+          %MerkleTree.Node{
+            children: [
+              %MerkleTree.Node{
+                children: [],
+                height: 0,
+                value: "597fcb31282d34654c200d3418fca5705c648ebf326ec73d8ddef11841f876d8"
+              },
+              %MerkleTree.Node{
+                children: [],
+                height: 0,
+                value: "d070dc5b8da9aea7dc0f5ad4c29d89965200059c9a0ceca3abd5da2492dcb71d"
+              }
+            ],
+            height: 1,
+            value: "40e2511a6323177e537acb2e90886e0da1f84656fd6334b89f60d742a3967f09"
+          }
+        ],
+        height: 2,
+        value: "9dc1674ae1ee61c90ba50b6261e8f9a47f7ea07d92612158edfe3c2a37c6d74c"
+      }
+    }
   """
 
   defstruct [:blocks, :root, :hash_function]
 
   # Number of children per node. Configurable.
   @number_of_children 2
+  @leaf_salt <<0>>
+  @node_salt <<1>>
 
   @type blocks :: [String.t(), ...]
   @type hash_function :: (String.t() -> String.t())
@@ -38,7 +72,6 @@ defmodule MerkleTree do
     Creates a new merkle tree, given a blocks and hash function or opts.
      available options:
       :hash_function - used hash in mercle tree default :sha256 from :cryto
-      :hash_leaves - flag says whether the leaves should be hashed, default true
       :height - allows to construct tree of provided height,
           empty leaves data will be taken from `:default_data_block` parameter
       :default_data_block - this data will be used to supply empty
@@ -70,10 +103,10 @@ defmodule MerkleTree do
   """
   @spec fast_root(blocks, Keyword.t()) :: MerkleTree.Node.hash()
   def fast_root(blocks, opts \\ []) do
-    {hash_function, height, hash_leaves?, default_data_block} = get_from_options(opts, blocks)
+    {hash_function, height, default_data_block} = get_from_options(opts, blocks)
 
-    default_leaf_value = if hash_leaves?, do: hash_function.(default_data_block), else: default_data_block
-    leaf_values = if hash_leaves?, do: Enum.map(blocks, hash_function), else: blocks
+    default_leaf_value = hash_function.(@leaf_salt <> default_data_block)
+    leaf_values = Enum.map(blocks, fn block -> hash_function.(@leaf_salt <> block) end)
 
     _fast_root(leaf_values, hash_function, 0, default_leaf_value, height)
   end
@@ -83,21 +116,21 @@ defmodule MerkleTree do
 
   defp _fast_root([root], _, final_height, _, final_height), do: root
 
-  defp _fast_root(nodes, hash_function, height, default_leaf, final_height) do
+  defp _fast_root(nodes, hash_function, height, default_node, final_height) do
     count = step = @number_of_children
-    leftover = List.duplicate(default_leaf, count - 1)
+    leftover = List.duplicate(default_node, count - 1)
     children_partitions = Enum.chunk_every(nodes, count, step, leftover)
     new_height = height + 1
 
     parents =
       Enum.map(children_partitions, fn partition ->
-        concatenated_values = partition |> Enum.join()
+        concatenated_values = [@node_salt | partition] |> Enum.join()
         hash_function.(concatenated_values)
       end)
 
-    new_default_leaf_value = hash_function.(default_leaf <> default_leaf)
+    new_default_node = hash_function.(@node_salt <> default_node <> default_node)
 
-    _fast_root(parents, hash_function, new_height, new_default_leaf_value, final_height)
+    _fast_root(parents, hash_function, new_height, new_default_node, final_height)
   end
 
   # takes care of the defaults etc
@@ -105,7 +138,6 @@ defmodule MerkleTree do
     {
       Keyword.get(opts, :hash_function, &MerkleTree.Crypto.sha256/1),
       Keyword.get(opts, :height, guess_height(Enum.count(blocks))),
-      Keyword.get(opts, :hash_leaves, true),
       Keyword.get(opts, :default_data_block, "")
     }
   end
@@ -122,10 +154,10 @@ defmodule MerkleTree do
     do: build(blocks, hash_function: hash_function)
 
   def build(blocks, opts) do
-    {hash_function, height, hash_leaves?, default_data_block} = get_from_options(opts, blocks)
+    {hash_function, height, default_data_block} = get_from_options(opts, blocks)
 
-    default_leaf_value = if hash_leaves?, do: hash_function.(default_data_block), else: default_data_block
-    leaf_values = if hash_leaves?, do: Enum.map(blocks, hash_function), else: blocks
+    default_leaf_value = hash_function.(@leaf_salt <> default_data_block)
+    leaf_values = Enum.map(blocks, fn block -> hash_function.(@leaf_salt <> block) end)
     default_leaf = %MerkleTree.Node{value: default_leaf_value, children: [], height: 0}
     leaves = Enum.map(leaf_values, &%MerkleTree.Node{value: &1, children: [], height: 0})
 
@@ -147,6 +179,7 @@ defmodule MerkleTree do
     parents =
       Enum.map(children_partitions, fn partition ->
         concatenated_values = partition |> Enum.map(& &1.value) |> Enum.join()
+        concatenated_values = @node_salt <> concatenated_values
 
         %MerkleTree.Node{
           value: hash_function.(concatenated_values),
@@ -155,7 +188,8 @@ defmodule MerkleTree do
         }
       end)
 
-    new_default_leaf_value = hash_function.(default_leaf.value <> default_leaf.value)
+    new_default_leaf_value =
+        hash_function.(@node_salt <>  default_leaf.value <> default_leaf.value)
 
     new_default_leaf = %MerkleTree.Node{
       value: new_default_leaf_value,
@@ -183,10 +217,10 @@ defmodule MerkleTree do
   end
 
   defp fill_blocks(blocks, _, _) when blocks != [] do
-    amout_elements = Enum.count(blocks)
-    required_leaves_count = :math.pow(2, _ceil(:math.log2(amout_elements)))
+    blocks_count = Enum.count(blocks)
+    required_leaves_count = :math.pow(2, _ceil(:math.log2(blocks_count)))
 
-    if required_leaves_count != amout_elements,
+    if required_leaves_count != blocks_count,
       do: raise(MerkleTree.ArgumentError),
       else: blocks
   end
