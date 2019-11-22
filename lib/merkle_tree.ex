@@ -56,6 +56,9 @@ defmodule MerkleTree do
 
   # Number of children per node. Configurable.
   @number_of_children 2
+  # values prepended to a leaf and node to differentiate between them when calculating values
+  # of parent in Merkle Tree, added to prevent a second preimage attack
+  # where a proof for node can be validated as a proof for leaf
   @leaf_salt <<0>>
   @node_salt <<1>>
 

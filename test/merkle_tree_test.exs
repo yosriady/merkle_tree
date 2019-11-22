@@ -52,7 +52,7 @@ defmodule MerkleTreeTest do
   test "merkle tree node" do
     hash = &MerkleTree.Crypto.sha256/1
 
-    assert MerkleTree.build(["a", "b"], &MerkleTree.Crypto.sha256/1) == %MerkleTree.Node{
+    assert MerkleTree.build(["a", "b"], hash) == %MerkleTree.Node{
              children: [
                %MerkleTree.Node{
                  children: [],
