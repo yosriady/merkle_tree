@@ -8,6 +8,7 @@
     <meta name="project" content="merkle_tree v2.0.0">
     <title>MerkleTree.Proof — merkle_tree v2.0.0</title>
     <link rel="stylesheet" href="dist/html-de2388dc2f8074b0a4db.css" />
+      <link rel="canonical" href="https://hexdocs.pm/merkle_tree/MerkleTree.Proof.html" />
     <script src="dist/sidebar_items-cb3c6640da.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/html-de2388dc2f8074b0a4db.js"></script>
@@ -72,11 +73,11 @@ MerkleTree.Proof      </h1>
         <section id="moduledoc">
 <p>  Generate and verify merkle proofs</p>
 <pre><code class="nohighlight makeup elixir"><span class="c1">## Usage Example</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">proof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MerkleTree</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1057379876-1">(</span><span class="sx">~w/a b c d/</span><span class="p" data-group-id="1057379876-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="nc">MerkleTree.Proof</span><span class="o">.</span><span class="n">prove</span><span class="p" data-group-id="1057379876-2">(</span><span class="mi">1</span><span class="p" data-group-id="1057379876-2">)</span><span class="w">
-</span><span class="p" data-group-id="1057379876-3">[</span><span class="s">&quot;40e2511a6323177e537acb2e90886e0da1f84656fd6334b89f60d742a3967f09&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="s">&quot;022a6979e6dab7aa5ae4c3e5e45f7e977112a7e63593820dbec1ec738a24f93c&quot;</span><span class="p" data-group-id="1057379876-3">]</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MerkleTree.Proof</span><span class="o">.</span><span class="n">proven?</span><span class="p" data-group-id="1057379876-4">(</span><span class="p" data-group-id="1057379876-5">{</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="1057379876-5">}</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;9dc1674ae1ee61c90ba50b6261e8f9a47f7ea07d92612158edfe3c2a37c6d74c&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">MerkleTree.Crypto</span><span class="o">.</span><span class="n">sha256</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">proof</span><span class="p" data-group-id="1057379876-4">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">proof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MerkleTree</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1946612574-1">(</span><span class="sx">~w/a b c d/</span><span class="p" data-group-id="1946612574-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="nc">MerkleTree.Proof</span><span class="o">.</span><span class="n">prove</span><span class="p" data-group-id="1946612574-2">(</span><span class="mi">1</span><span class="p" data-group-id="1946612574-2">)</span><span class="w">
+</span><span class="p" data-group-id="1946612574-3">[</span><span class="s">&quot;40e2511a6323177e537acb2e90886e0da1f84656fd6334b89f60d742a3967f09&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;022a6979e6dab7aa5ae4c3e5e45f7e977112a7e63593820dbec1ec738a24f93c&quot;</span><span class="p" data-group-id="1946612574-3">]</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MerkleTree.Proof</span><span class="o">.</span><span class="n">proven?</span><span class="p" data-group-id="1946612574-4">(</span><span class="p" data-group-id="1946612574-5">{</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="1946612574-5">}</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;9dc1674ae1ee61c90ba50b6261e8f9a47f7ea07d92612158edfe3c2a37c6d74c&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">MerkleTree.Crypto</span><span class="o">.</span><span class="n">sha256</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">proof</span><span class="p" data-group-id="1946612574-4">)</span><span class="w">
 </span><span class="no">true</span></code></pre>
         </section>
 

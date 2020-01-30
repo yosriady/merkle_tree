@@ -8,6 +8,7 @@
     <meta name="project" content="merkle_tree v2.0.0">
     <title>MerkleTree — merkle_tree v2.0.0</title>
     <link rel="stylesheet" href="dist/html-de2388dc2f8074b0a4db.css" />
+      <link rel="canonical" href="https://hexdocs.pm/merkle_tree/MerkleTree.html" />
     <script src="dist/sidebar_items-cb3c6640da.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/html-de2388dc2f8074b0a4db.js"></script>
@@ -77,46 +78,46 @@ MerkleTree      </h1>
 <pre><code class="nohighlight makeup elixir"><span class="c1">## Usage Example</span></code></pre>
 <p>  iex&gt; MerkleTree.new [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
   %MerkleTree{</p>
-<pre><code class="nohighlight makeup elixir"><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-1">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p" data-group-id="9962514565-1">]</span><span class="p">,</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-1">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p" data-group-id="3374689249-1">]</span><span class="p">,</span><span class="w">
 </span><span class="ss">hash_function</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">MerkleTree.Crypto</span><span class="o">.</span><span class="n">sha256</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w">
-</span><span class="ss">root</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-2">%</span><span class="nc" data-group-id="9962514565-2">MerkleTree.Node</span><span class="p" data-group-id="9962514565-2">{</span><span class="w">
-  </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-3">[</span><span class="w">
-    </span><span class="p" data-group-id="9962514565-4">%</span><span class="nc" data-group-id="9962514565-4">MerkleTree.Node</span><span class="p" data-group-id="9962514565-4">{</span><span class="w">
-      </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-5">[</span><span class="w">
-        </span><span class="p" data-group-id="9962514565-6">%</span><span class="nc" data-group-id="9962514565-6">MerkleTree.Node</span><span class="p" data-group-id="9962514565-6">{</span><span class="w">
-          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-7">[</span><span class="p" data-group-id="9962514565-7">]</span><span class="p">,</span><span class="w">
+</span><span class="ss">root</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-2">%</span><span class="nc" data-group-id="3374689249-2">MerkleTree.Node</span><span class="p" data-group-id="3374689249-2">{</span><span class="w">
+  </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-3">[</span><span class="w">
+    </span><span class="p" data-group-id="3374689249-4">%</span><span class="nc" data-group-id="3374689249-4">MerkleTree.Node</span><span class="p" data-group-id="3374689249-4">{</span><span class="w">
+      </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-5">[</span><span class="w">
+        </span><span class="p" data-group-id="3374689249-6">%</span><span class="nc" data-group-id="3374689249-6">MerkleTree.Node</span><span class="p" data-group-id="3374689249-6">{</span><span class="w">
+          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-7">[</span><span class="p" data-group-id="3374689249-7">]</span><span class="p">,</span><span class="w">
           </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;022a6979e6dab7aa5ae4c3e5e45f7e977112a7e63593820dbec1ec738a24f93c&quot;</span><span class="w">
-        </span><span class="p" data-group-id="9962514565-6">}</span><span class="p">,</span><span class="w">
-        </span><span class="p" data-group-id="9962514565-8">%</span><span class="nc" data-group-id="9962514565-8">MerkleTree.Node</span><span class="p" data-group-id="9962514565-8">{</span><span class="w">
-          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-9">[</span><span class="p" data-group-id="9962514565-9">]</span><span class="p">,</span><span class="w">
+        </span><span class="p" data-group-id="3374689249-6">}</span><span class="p">,</span><span class="w">
+        </span><span class="p" data-group-id="3374689249-8">%</span><span class="nc" data-group-id="3374689249-8">MerkleTree.Node</span><span class="p" data-group-id="3374689249-8">{</span><span class="w">
+          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-9">[</span><span class="p" data-group-id="3374689249-9">]</span><span class="p">,</span><span class="w">
           </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;57eb35615d47f34ec714cacdf5fd74608a5e8e102724e80b24b287c0c27b6a31&quot;</span><span class="w">
-        </span><span class="p" data-group-id="9962514565-8">}</span><span class="w">
-      </span><span class="p" data-group-id="9962514565-5">]</span><span class="p">,</span><span class="w">
+        </span><span class="p" data-group-id="3374689249-8">}</span><span class="w">
+      </span><span class="p" data-group-id="3374689249-5">]</span><span class="p">,</span><span class="w">
       </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4c64254e6636add7f281ff49278beceb26378bd0021d1809974994e6e233ec35&quot;</span><span class="w">
-    </span><span class="p" data-group-id="9962514565-4">}</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="9962514565-10">%</span><span class="nc" data-group-id="9962514565-10">MerkleTree.Node</span><span class="p" data-group-id="9962514565-10">{</span><span class="w">
-      </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-11">[</span><span class="w">
-        </span><span class="p" data-group-id="9962514565-12">%</span><span class="nc" data-group-id="9962514565-12">MerkleTree.Node</span><span class="p" data-group-id="9962514565-12">{</span><span class="w">
-          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-13">[</span><span class="p" data-group-id="9962514565-13">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="3374689249-4">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="3374689249-10">%</span><span class="nc" data-group-id="3374689249-10">MerkleTree.Node</span><span class="p" data-group-id="3374689249-10">{</span><span class="w">
+      </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-11">[</span><span class="w">
+        </span><span class="p" data-group-id="3374689249-12">%</span><span class="nc" data-group-id="3374689249-12">MerkleTree.Node</span><span class="p" data-group-id="3374689249-12">{</span><span class="w">
+          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-13">[</span><span class="p" data-group-id="3374689249-13">]</span><span class="p">,</span><span class="w">
           </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;597fcb31282d34654c200d3418fca5705c648ebf326ec73d8ddef11841f876d8&quot;</span><span class="w">
-        </span><span class="p" data-group-id="9962514565-12">}</span><span class="p">,</span><span class="w">
-        </span><span class="p" data-group-id="9962514565-14">%</span><span class="nc" data-group-id="9962514565-14">MerkleTree.Node</span><span class="p" data-group-id="9962514565-14">{</span><span class="w">
-          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9962514565-15">[</span><span class="p" data-group-id="9962514565-15">]</span><span class="p">,</span><span class="w">
+        </span><span class="p" data-group-id="3374689249-12">}</span><span class="p">,</span><span class="w">
+        </span><span class="p" data-group-id="3374689249-14">%</span><span class="nc" data-group-id="3374689249-14">MerkleTree.Node</span><span class="p" data-group-id="3374689249-14">{</span><span class="w">
+          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3374689249-15">[</span><span class="p" data-group-id="3374689249-15">]</span><span class="p">,</span><span class="w">
           </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;d070dc5b8da9aea7dc0f5ad4c29d89965200059c9a0ceca3abd5da2492dcb71d&quot;</span><span class="w">
-        </span><span class="p" data-group-id="9962514565-14">}</span><span class="w">
-      </span><span class="p" data-group-id="9962514565-11">]</span><span class="p">,</span><span class="w">
+        </span><span class="p" data-group-id="3374689249-14">}</span><span class="w">
+      </span><span class="p" data-group-id="3374689249-11">]</span><span class="p">,</span><span class="w">
       </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;40e2511a6323177e537acb2e90886e0da1f84656fd6334b89f60d742a3967f09&quot;</span><span class="w">
-    </span><span class="p" data-group-id="9962514565-10">}</span><span class="w">
-  </span><span class="p" data-group-id="9962514565-3">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="3374689249-10">}</span><span class="w">
+  </span><span class="p" data-group-id="3374689249-3">]</span><span class="p">,</span><span class="w">
   </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9dc1674ae1ee61c90ba50b6261e8f9a47f7ea07d92612158edfe3c2a37c6d74c&quot;</span><span class="w">
-</span><span class="p" data-group-id="9962514565-2">}</span></code></pre>
+</span><span class="p" data-group-id="3374689249-2">}</span></code></pre>
 <p>  }</p>
         </section>
 
