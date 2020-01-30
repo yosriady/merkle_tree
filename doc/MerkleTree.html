@@ -1,337 +1,353 @@
-    <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>MerkleTree – merkle_tree v1.6.1</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
-    
-      <link rel="canonical" href="https://hexdocs.pm/merkle_tree/MerkleTree.html" />
-    
-    <script src="dist/sidebar_items.js"></script>
+    <meta name="generator" content="ExDoc v0.21.2">
+    <meta name="project" content="merkle_tree v2.0.0">
+    <title>MerkleTree — merkle_tree v2.0.0</title>
+    <link rel="stylesheet" href="dist/html-de2388dc2f8074b0a4db.css" />
+    <script src="dist/sidebar_items-cb3c6640da.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/html-de2388dc2f8074b0a4db.js"></script>
   </head>
   <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
 
-    <div class="main">
-<button class="sidebar-toggle">
-  <i class="icon-menu"></i>
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
 </button>
-<section class="sidebar">
 
-  
-  <a href="api-reference.html" class="sidebar-projectLink">
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button">
+      <span class="icon-cross" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
     <div class="sidebar-projectDetails">
-      <h1 class="sidebar-projectName">
-        merkle_tree
-      </h1>
+      <a href="api-reference.html" class="sidebar-projectName">
+merkle_tree      </a>
       <h2 class="sidebar-projectVersion">
-        v1.6.1
+        v2.0.0
       </h2>
     </div>
-    
-  </a>
-
-  <div class="sidebar-search">
-    <i class="icon-search"></i>
-    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
 
-    
       <li><a id="modules-list" href="#full-list">Modules</a></li>
-    
 
-    
       <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
-    
 
-    
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-
       <h1>
-        <small class="visible-xs">merkle_tree v1.6.1</small>
-        MerkleTree
-        
-        
-      </h1>
+        <small class="app-vsn">merkle_tree v2.0.0</small>
+MerkleTree      </h1>
 
-      
-        <section id="moduledoc" class="docstring">
-          <p>  A hash tree or Merkle tree is a tree in which every non-leaf node is labelled
+
+        <section id="moduledoc">
+<p>  A hash tree or Merkle tree is a tree in which every non-leaf node is labelled
   with the hash of the labels or values (in case of leaves) of its child nodes.
   Hash trees are useful because they allow efficient and secure verification of
   the contents of large data structures.</p>
-<pre><code class="elixir">## Usage Example
-
-iex&gt; MerkleTree.new [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
-%MerkleTree{blocks: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], hash_function: &amp;MerkleTree.Crypto.sha256/1,
-      root: %MerkleTree.Node{children: [%MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
-           value: &quot;ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb&quot;},
-          %MerkleTree.Node{children: [], height: 0, value: &quot;3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d&quot;}], height: 1,
-         value: &quot;62af5c3cb8da3e4f25061e829ebeea5c7513c54949115b1acc225930a90154da&quot;},
-        %MerkleTree.Node{children: [%MerkleTree.Node{children: [], height: 0,
-           value: &quot;2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6&quot;},
-          %MerkleTree.Node{children: [], height: 0, value: &quot;18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4&quot;}], height: 1,
-         value: &quot;d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a&quot;}], height: 2,
-       value: &quot;58c89d709329eb37285837b042ab6ff72c7c8f74de0446b091b6a0131c102cfd&quot;}}</code></pre>
-
+<pre><code class="nohighlight makeup elixir"><span class="c1">## Usage Example</span></code></pre>
+<p>  iex&gt; MerkleTree.new [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
+  %MerkleTree{</p>
+<pre><code class="nohighlight makeup elixir"><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-1">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p" data-group-id="3371463940-1">]</span><span class="p">,</span><span class="w">
+</span><span class="ss">hash_function</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">MerkleTree.Crypto</span><span class="o">.</span><span class="n">sha256</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w">
+</span><span class="ss">root</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-2">%</span><span class="nc" data-group-id="3371463940-2">MerkleTree.Node</span><span class="p" data-group-id="3371463940-2">{</span><span class="w">
+  </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-3">[</span><span class="w">
+    </span><span class="p" data-group-id="3371463940-4">%</span><span class="nc" data-group-id="3371463940-4">MerkleTree.Node</span><span class="p" data-group-id="3371463940-4">{</span><span class="w">
+      </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-5">[</span><span class="w">
+        </span><span class="p" data-group-id="3371463940-6">%</span><span class="nc" data-group-id="3371463940-6">MerkleTree.Node</span><span class="p" data-group-id="3371463940-6">{</span><span class="w">
+          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-7">[</span><span class="p" data-group-id="3371463940-7">]</span><span class="p">,</span><span class="w">
+          </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;022a6979e6dab7aa5ae4c3e5e45f7e977112a7e63593820dbec1ec738a24f93c&quot;</span><span class="w">
+        </span><span class="p" data-group-id="3371463940-6">}</span><span class="p">,</span><span class="w">
+        </span><span class="p" data-group-id="3371463940-8">%</span><span class="nc" data-group-id="3371463940-8">MerkleTree.Node</span><span class="p" data-group-id="3371463940-8">{</span><span class="w">
+          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-9">[</span><span class="p" data-group-id="3371463940-9">]</span><span class="p">,</span><span class="w">
+          </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;57eb35615d47f34ec714cacdf5fd74608a5e8e102724e80b24b287c0c27b6a31&quot;</span><span class="w">
+        </span><span class="p" data-group-id="3371463940-8">}</span><span class="w">
+      </span><span class="p" data-group-id="3371463940-5">]</span><span class="p">,</span><span class="w">
+      </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4c64254e6636add7f281ff49278beceb26378bd0021d1809974994e6e233ec35&quot;</span><span class="w">
+    </span><span class="p" data-group-id="3371463940-4">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="3371463940-10">%</span><span class="nc" data-group-id="3371463940-10">MerkleTree.Node</span><span class="p" data-group-id="3371463940-10">{</span><span class="w">
+      </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-11">[</span><span class="w">
+        </span><span class="p" data-group-id="3371463940-12">%</span><span class="nc" data-group-id="3371463940-12">MerkleTree.Node</span><span class="p" data-group-id="3371463940-12">{</span><span class="w">
+          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-13">[</span><span class="p" data-group-id="3371463940-13">]</span><span class="p">,</span><span class="w">
+          </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;597fcb31282d34654c200d3418fca5705c648ebf326ec73d8ddef11841f876d8&quot;</span><span class="w">
+        </span><span class="p" data-group-id="3371463940-12">}</span><span class="p">,</span><span class="w">
+        </span><span class="p" data-group-id="3371463940-14">%</span><span class="nc" data-group-id="3371463940-14">MerkleTree.Node</span><span class="p" data-group-id="3371463940-14">{</span><span class="w">
+          </span><span class="ss">children</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3371463940-15">[</span><span class="p" data-group-id="3371463940-15">]</span><span class="p">,</span><span class="w">
+          </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;d070dc5b8da9aea7dc0f5ad4c29d89965200059c9a0ceca3abd5da2492dcb71d&quot;</span><span class="w">
+        </span><span class="p" data-group-id="3371463940-14">}</span><span class="w">
+      </span><span class="p" data-group-id="3371463940-11">]</span><span class="p">,</span><span class="w">
+      </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;40e2511a6323177e537acb2e90886e0da1f84656fd6334b89f60d742a3967f09&quot;</span><span class="w">
+    </span><span class="p" data-group-id="3371463940-10">}</span><span class="w">
+  </span><span class="p" data-group-id="3371463940-3">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="ss">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9dc1674ae1ee61c90ba50b6261e8f9a47f7ea07d92612158edfe3c2a37c6d74c&quot;</span><span class="w">
+</span><span class="p" data-group-id="3371463940-2">}</span></code></pre>
+<p>  }</p>
         </section>
-      
 
-      
         <section id="summary" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#summary">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Summary
           </h1>
-          
   <div class="summary-types summary">
     <h2>
       <a href="#types">Types</a>
     </h2>
-    <div class="summary-row">
+<div class="summary-row">
   <div class="summary-signature">
     <a href="#t:blocks/0">blocks()</a>
   </div>
-  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#t:hash_function/0">hash_function()</a>
   </div>
-  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#t:root/0">root()</a>
   </div>
-  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#t:t/0">t()</a>
   </div>
-  
 </div>
-
   </div>
-
-
-          
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
-    <div class="summary-row">
+<div class="summary-row">
   <div class="summary-signature">
     <a href="#build/2">build(blocks, hash_function_or_opts \\ [])</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Builds a root MerkleTree.Node structure of a merkle tree</p>
-</div>
-  
+    <div class="summary-synopsis"><p>Builds a root MerkleTree.Node structure of a merkle tree</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#fast_root/2">fast_root(blocks, opts \\ [])</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Calculates the root of the merkle tree without building the entire tree explicitly,</p>
-</div>
-  
+    <div class="summary-synopsis"><p>Calculates the root of the merkle tree without building the entire tree explicitly,</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#new/2">new(blocks, hash_function_or_opts \\ [])</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Creates a new merkle tree, given a blocks and hash function or opts.
-   available options:</p>
-<pre><code class="elixir">:hash_function - used hash in mercle tree default :sha256 from :cryto
-:hash_leaves - flag says whether the leaves should be hashed, default true
-:height - allows to construct tree of provided height,
-    empty leaves data will be taken from `:default_data_block` parameter
-:default_data_block - this data will be used to supply empty
-    leaves in case where there isn&#39;t enough blocks provided</code></pre>
-<p>Check out <a href="MerkleTree.Crypto.html"><code class="inline">MerkleTree.Crypto</code></a> for other available cryptographic hashes.
-Alternatively, you can supply your own hash function that has the spec
-<code class="inline">(String.t -&gt; String.t)</code></p>
+    <div class="summary-synopsis"><p>  Creates a new merkle tree, given a blocks and hash function or opts.
+   available options</p></div>
 </div>
-  
-</div>
-
   </div>
-
-
-          
-
-          
-
         </section>
-      
 
-      
-        <section id="types" class="types details-list">
+        <section id="types" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#types">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
-            Types
-          </h1>
+Types          </h1>
           <div class="types-list">
-            <div id="t:blocks/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:blocks/0">blocks</a> :: [<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, ...]</code></pre>
-  
-</div>
-<div id="t:hash_function/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:hash_function/0">hash_function</a> :: (<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a> -> <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>)</code></pre>
-  
-</div>
-<div id="t:root/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:root/0">root</a> :: <a href="MerkleTree.Node.html#t:t/0">MerkleTree.Node.t</a></code></pre>
-  
-</div>
-<div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %MerkleTree{blocks: <a href="#t:blocks/0">blocks</a>, hash_function: <a href="#t:hash_function/0">hash_function</a>, root: <a href="#t:root/0">root</a>}</code></pre>
-  
-</div>
-
+<section class="detail" id="t:blocks/0">
+  <div class="detail-header">
+    <a href="#t:blocks/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">blocks()</h1>
+      <div class="specs">
+          <pre>blocks() :: [<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), ...]</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:hash_function/0">
+  <div class="detail-header">
+    <a href="#t:hash_function/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">hash_function()</h1>
+      <div class="specs">
+          <pre>hash_function() :: (<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>() -> <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>())</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:root/0">
+  <div class="detail-header">
+    <a href="#t:root/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">root()</h1>
+      <div class="specs">
+          <pre>root() :: <a href="MerkleTree.Node.html#t:t/0">MerkleTree.Node.t</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:t/0">
+  <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">t()</h1>
+      <div class="specs">
+          <pre>t() :: %MerkleTree{
+  blocks: <a href="#t:blocks/0">blocks</a>(),
+  hash_function: <a href="#t:hash_function/0">hash_function</a>(),
+  root: <a href="#t:root/0">root</a>()
+}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
           </div>
         </section>
-      
-
-      
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
-            Functions
-          </h1>
-          <div class="detail" id="build/2">
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="build/2">
+    <span id="build/1"></span>
   <div class="detail-header">
     <a href="#build/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">build(blocks, hash_function_or_opts \\ [])</span>
-    
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">build(<a href="#t:blocks/0">blocks</a>, <a href="#t:hash_function/0">hash_function</a> | <a href="http://elixir-lang.org/docs/stable/elixir/Keyword.html#t:t/0">Keyword.t</a>) :: <a href="#t:root/0">root</a></code></pre>
-        
+    <h1 class="signature">build(blocks, hash_function_or_opts \\ [])</h1>
+      <div class="specs">
+          <pre>build(<a href="#t:blocks/0">blocks</a>(), <a href="#t:hash_function/0">hash_function</a>() | <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="#t:root/0">root</a>()</pre>
       </div>
-    </div>
-  
+  </div>
   <section class="docstring">
-    <p>Builds a root MerkleTree.Node structure of a merkle tree</p>
+<p>Builds a root MerkleTree.Node structure of a merkle tree</p>
 <p>See <a href="#new/2"><code class="inline">new/2</code></a> for a rundown of options</p>
-
   </section>
-</div>
-<div class="detail" id="fast_root/2">
+</section>
+<section class="detail" id="fast_root/2">
+    <span id="fast_root/1"></span>
   <div class="detail-header">
     <a href="#fast_root/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">fast_root(blocks, opts \\ [])</span>
-    
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">fast_root(<a href="#t:blocks/0">blocks</a>, <a href="http://elixir-lang.org/docs/stable/elixir/Keyword.html#t:t/0">Keyword.t</a>) :: <a href="MerkleTree.Node.html#t:hash/0">MerkleTree.Node.hash</a></code></pre>
-        
+    <h1 class="signature">fast_root(blocks, opts \\ [])</h1>
+      <div class="specs">
+          <pre>fast_root(<a href="#t:blocks/0">blocks</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="MerkleTree.Node.html#t:hash/0">MerkleTree.Node.hash</a>()</pre>
       </div>
-    </div>
-  
+  </div>
   <section class="docstring">
-    <p>Calculates the root of the merkle tree without building the entire tree explicitly,</p>
+<p>Calculates the root of the merkle tree without building the entire tree explicitly,</p>
 <p>See <a href="#new/2"><code class="inline">new/2</code></a> for a rundown of options</p>
-
   </section>
-</div>
-<div class="detail" id="new/2">
+</section>
+<section class="detail" id="new/2">
+    <span id="new/1"></span>
   <div class="detail-header">
     <a href="#new/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">new(blocks, hash_function_or_opts \\ [])</span>
-    
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">new(<a href="#t:blocks/0">blocks</a>, <a href="#t:hash_function/0">hash_function</a> | <a href="http://elixir-lang.org/docs/stable/elixir/Keyword.html#t:t/0">Keyword.t</a>) :: <a href="#t:t/0">t</a></code></pre>
-        
+    <h1 class="signature">new(blocks, hash_function_or_opts \\ [])</h1>
+      <div class="specs">
+          <pre>new(<a href="#t:blocks/0">blocks</a>(), <a href="#t:hash_function/0">hash_function</a>() | <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="#t:t/0">t</a>()</pre>
       </div>
-    </div>
-  
+  </div>
   <section class="docstring">
-    <p>  Creates a new merkle tree, given a blocks and hash function or opts.
+<p>  Creates a new merkle tree, given a blocks and hash function or opts.
    available options:</p>
-<pre><code class="elixir">:hash_function - used hash in mercle tree default :sha256 from :cryto
-:hash_leaves - flag says whether the leaves should be hashed, default true
-:height - allows to construct tree of provided height,
-    empty leaves data will be taken from `:default_data_block` parameter
-:default_data_block - this data will be used to supply empty
-    leaves in case where there isn&#39;t enough blocks provided</code></pre>
+<pre><code class="nohighlight makeup elixir"><span class="ss">:hash_function</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">mercle</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="ss">:sha256</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="ss">:cryto</span><span class="w">
+</span><span class="ss">:height</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">allows</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">construct</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">provided</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w">
+    </span><span class="n">empty</span><span class="w"> </span><span class="n">leaves</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">taken</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="err">`</span><span class="ss">:default_data_block</span><span class="err">`</span><span class="w"> </span><span class="n">parameter</span><span class="w">
+</span><span class="ss">:default_data_block</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">supply</span><span class="w"> </span><span class="n">empty</span><span class="w">
+    </span><span class="n">leaves</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">there</span><span class="w"> </span><span class="n">isn</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">enough</span><span class="w"> </span><span class="n">blocks</span><span class="w"> </span><span class="n">provided</span></code></pre>
 <p>Check out <a href="MerkleTree.Crypto.html"><code class="inline">MerkleTree.Crypto</code></a> for other available cryptographic hashes.
 Alternatively, you can supply your own hash function that has the spec
 <code class="inline">(String.t -&gt; String.t)</code>.</p>
-
   </section>
-</div>
-
+</section>
+          </div>
         </section>
-      
-
-      
-
-      
-          <footer class="footer">
+      <footer class="footer">
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.21.2),
           </span>
           <span class="line">
             designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
-            </span>
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
         </p>
-        <button class="night-mode-toggle" />
+        <p>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+        </p>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
   </body>
 </html>
-

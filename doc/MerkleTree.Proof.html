@@ -1,244 +1,221 @@
-    <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>MerkleTree.Proof – merkle_tree v1.6.1</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
-    
-      <link rel="canonical" href="https://hexdocs.pm/merkle_tree/MerkleTree.Proof.html" />
-    
-    <script src="dist/sidebar_items.js"></script>
+    <meta name="generator" content="ExDoc v0.21.2">
+    <meta name="project" content="merkle_tree v2.0.0">
+    <title>MerkleTree.Proof — merkle_tree v2.0.0</title>
+    <link rel="stylesheet" href="dist/html-de2388dc2f8074b0a4db.css" />
+    <script src="dist/sidebar_items-cb3c6640da.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/html-de2388dc2f8074b0a4db.js"></script>
   </head>
   <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
 
-    <div class="main">
-<button class="sidebar-toggle">
-  <i class="icon-menu"></i>
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
 </button>
-<section class="sidebar">
 
-  
-  <a href="api-reference.html" class="sidebar-projectLink">
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button">
+      <span class="icon-cross" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
     <div class="sidebar-projectDetails">
-      <h1 class="sidebar-projectName">
-        merkle_tree
-      </h1>
+      <a href="api-reference.html" class="sidebar-projectName">
+merkle_tree      </a>
       <h2 class="sidebar-projectVersion">
-        v1.6.1
+        v2.0.0
       </h2>
     </div>
-    
-  </a>
-
-  <div class="sidebar-search">
-    <i class="icon-search"></i>
-    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
 
-    
       <li><a id="modules-list" href="#full-list">Modules</a></li>
-    
 
-    
       <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
-    
 
-    
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-
       <h1>
-        <small class="visible-xs">merkle_tree v1.6.1</small>
-        MerkleTree.Proof
-        
-        
-      </h1>
+        <small class="app-vsn">merkle_tree v2.0.0</small>
+MerkleTree.Proof      </h1>
 
-      
-        <section id="moduledoc" class="docstring">
-          <p>  Generate and verify merkle proofs</p>
-<pre><code class="elixir">## Usage Example
-iex&gt; proof = MerkleTree.new(~w/a b c d/) |&gt;
-...&gt; MerkleTree.Proof.prove(1)
-%MerkleTree.Proof{hash_function: &amp;MerkleTree.Crypto.sha256/1,
- hashes: [&quot;d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a&quot;,
-  &quot;ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb&quot;]}
-iex&gt; MerkleTree.Proof.proven?({&quot;b&quot;, 1}, &quot;58c89d709329eb37285837b042ab6ff72c7c8f74de0446b091b6a0131c102cfd&quot;, proof)
-true</code></pre>
 
+        <section id="moduledoc">
+<p>  Generate and verify merkle proofs</p>
+<pre><code class="nohighlight makeup elixir"><span class="c1">## Usage Example</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">proof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MerkleTree</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="4581852211-1">(</span><span class="sx">~w/a b c d/</span><span class="p" data-group-id="4581852211-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="nc">MerkleTree.Proof</span><span class="o">.</span><span class="n">prove</span><span class="p" data-group-id="4581852211-2">(</span><span class="mi">1</span><span class="p" data-group-id="4581852211-2">)</span><span class="w">
+</span><span class="p" data-group-id="4581852211-3">[</span><span class="s">&quot;40e2511a6323177e537acb2e90886e0da1f84656fd6334b89f60d742a3967f09&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;022a6979e6dab7aa5ae4c3e5e45f7e977112a7e63593820dbec1ec738a24f93c&quot;</span><span class="p" data-group-id="4581852211-3">]</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MerkleTree.Proof</span><span class="o">.</span><span class="n">proven?</span><span class="p" data-group-id="4581852211-4">(</span><span class="p" data-group-id="4581852211-5">{</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="4581852211-5">}</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;9dc1674ae1ee61c90ba50b6261e8f9a47f7ea07d92612158edfe3c2a37c6d74c&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">MerkleTree.Crypto</span><span class="o">.</span><span class="n">sha256</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">proof</span><span class="p" data-group-id="4581852211-4">)</span><span class="w">
+</span><span class="no">true</span></code></pre>
         </section>
-      
 
-      
         <section id="summary" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#summary">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Summary
           </h1>
-          
   <div class="summary-types summary">
     <h2>
       <a href="#types">Types</a>
     </h2>
-    <div class="summary-row">
+<div class="summary-row">
   <div class="summary-signature">
-    <a href="#t:t/0">t()</a>
+    <a href="#t:proof_t/0">proof_t()</a>
   </div>
-  
 </div>
-
   </div>
-
-
-          
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
-    <div class="summary-row">
+<div class="summary-row">
   <div class="summary-signature">
-    <a href="#prove/2">prove(tree, index)</a>
+    <a href="#prove/2">prove(root, index)</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Generates proof for a block at a specific index</p>
-</div>
-  
+    <div class="summary-synopsis"><p>Generates proof for a block at a specific index</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#proven?/4">proven?(arg, root_hash, hash_function, proof)</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Verifies proof for a block at a specific index</p>
+    <div class="summary-synopsis"><p>Verifies proof for a block at a specific index</p></div>
 </div>
-  
-</div>
-
   </div>
-
-
-          
-
-          
-
         </section>
-      
 
-      
-        <section id="types" class="types details-list">
+        <section id="types" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#types">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
-            Types
-          </h1>
+Types          </h1>
           <div class="types-list">
-            <div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %MerkleTree.Proof{hash_function: <a href="MerkleTree.html#t:hash_function/0">MerkleTree.hash_function</a> | nil, hashes: [<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, ...]}</code></pre>
-  
-</div>
-
+<section class="detail" id="t:proof_t/0">
+  <div class="detail-header">
+    <a href="#t:proof_t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">proof_t()</h1>
+      <div class="specs">
+          <pre>proof_t() :: [<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()]</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
           </div>
         </section>
-      
-
-      
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
-            Functions
-          </h1>
-          <div class="detail" id="prove/2">
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="prove/2">
   <div class="detail-header">
     <a href="#prove/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">prove(tree, index)</span>
-    
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">prove(<a href="MerkleTree.html#t:t/0">MerkleTree.t</a> | <a href="MerkleTree.Node.html#t:t/0">MerkleTree.Node.t</a>, non_neg_integer) :: <a href="#t:t/0">t</a></code></pre>
-        
+    <h1 class="signature">prove(root, index)</h1>
+      <div class="specs">
+          <pre>prove(<a href="MerkleTree.html#t:t/0">MerkleTree.t</a>() | <a href="MerkleTree.Node.html#t:t/0">MerkleTree.Node.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()) :: <a href="#t:proof_t/0">proof_t</a>()</pre>
       </div>
-    </div>
-  
+  </div>
   <section class="docstring">
-    <p>Generates proof for a block at a specific index</p>
-
+<p>Generates proof for a block at a specific index</p>
   </section>
-</div>
-<div class="detail" id="proven?/4">
+</section>
+<section class="detail" id="proven?/4">
   <div class="detail-header">
     <a href="#proven?/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">proven?(arg, root_hash, hash_function, proof)</span>
-    
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">proven?({<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, non_neg_integer}, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="MerkleTree.html#t:hash_function/0">MerkleTree.hash_function</a>, <a href="#t:t/0">t</a>) :: boolean</code></pre>
-        
+    <h1 class="signature">proven?(arg, root_hash, hash_function, proof)</h1>
+      <div class="specs">
+          <pre>proven?(
+  {<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()},
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  <a href="MerkleTree.html#t:hash_function/0">MerkleTree.hash_function</a>(),
+  <a href="#t:proof_t/0">proof_t</a>()
+) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
       </div>
-    </div>
-  
+  </div>
   <section class="docstring">
-    <p>Verifies proof for a block at a specific index</p>
-
+<p>Verifies proof for a block at a specific index</p>
   </section>
-</div>
-
+</section>
+          </div>
         </section>
-      
-
-      
-
-      
-          <footer class="footer">
+      <footer class="footer">
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.21.2),
           </span>
           <span class="line">
             designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
-            </span>
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
         </p>
-        <button class="night-mode-toggle" />
+        <p>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+        </p>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
   </body>
 </html>
-
