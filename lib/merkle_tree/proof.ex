@@ -5,31 +5,28 @@ defmodule MerkleTree.Proof do
       ## Usage Example
       iex> proof = MerkleTree.new(~w/a b c d/) |>
       ...> MerkleTree.Proof.prove(1)
-      %MerkleTree.Proof{hash_function: &MerkleTree.Crypto.sha256/1,
-       hashes: ["d3a0f1c792ccf7f1708d5422696263e35755a86917ea76ef9242bd4a8cf4891a",
-        "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"]}
-      iex> MerkleTree.Proof.proven?({"b", 1}, "58c89d709329eb37285837b042ab6ff72c7c8f74de0446b091b6a0131c102cfd", proof)
+      ["40e2511a6323177e537acb2e90886e0da1f84656fd6334b89f60d742a3967f09",
+        "022a6979e6dab7aa5ae4c3e5e45f7e977112a7e63593820dbec1ec738a24f93c"]
+      iex> MerkleTree.Proof.proven?({"b", 1}, "9dc1674ae1ee61c90ba50b6261e8f9a47f7ea07d92612158edfe3c2a37c6d74c", &MerkleTree.Crypto.sha256/1, proof)
       true
 
   """
+  @leaf_salt <<0>>
+  @node_salt <<1>>
+
   defstruct [:hashes, :hash_function]
 
-  @type t :: %MerkleTree.Proof{
-          hashes: [String.t(), ...],
-          # TODO: remove when deprecated MerkleTree.Proof.proven?/3 support ends
-          hash_function: MerkleTree.hash_function() | nil
-        }
+  @type proof_t() :: list(String.t())
 
   @doc """
   Generates proof for a block at a specific index
   """
-  @spec prove(MerkleTree.t() | MerkleTree.Node.t(), non_neg_integer) :: t
-  def prove(%MerkleTree{root: root} = tree, index),
-    # TODO: remove the struct update with hash function, when deprecated MerkleTree.Proof.proven?/3 support ends
-    do: %MerkleTree.Proof{prove(root, index) | hash_function: tree.hash_function}
+  @spec prove(MerkleTree.t() | MerkleTree.Node.t(), non_neg_integer) :: proof_t()
+  def prove(%MerkleTree{root: root}, index),
+    do: prove(root, index)
 
   def prove(%MerkleTree.Node{height: height} = root, index),
-    do: %MerkleTree.Proof{hashes: _prove(root, binarize(index, height))}
+    do: _prove(root, binarize(index, height))
 
   defp _prove(_, ""), do: []
 
@@ -51,30 +48,22 @@ defmodule MerkleTree.Proof do
   @doc """
   Verifies proof for a block at a specific index
   """
-  @spec proven?({String.t(), non_neg_integer}, String.t(), MerkleTree.hash_function(), t) :: boolean
-  def proven?({block, index}, root_hash, hash_function, %MerkleTree.Proof{hashes: proof}) do
-    height = length(proof)
-    root_hash == _hash_proof(block, binarize(index, height), proof, hash_function)
-  end
-
-  @doc false
-  @deprecated "Use proven?/4 instead"
-  # TODO: remove when deprecated MerkleTree.Proof.proven?/3 support ends
-  def proven?({block, index}, root_hash, %MerkleTree.Proof{hashes: proof, hash_function: hash_function}) do
+  @spec proven?({String.t(), non_neg_integer}, String.t(), MerkleTree.hash_function(), proof_t()) :: boolean
+  def proven?({block, index}, root_hash, hash_function, proof) do
     height = length(proof)
     root_hash == _hash_proof(block, binarize(index, height), proof, hash_function)
   end
 
   defp _hash_proof(block, "", [], hash_function) do
-    hash_function.(block)
+    hash_function.(@leaf_salt <> block)
   end
 
   defp _hash_proof(block, index_binary, [proof_head | proof_tail], hash_function) do
     {path_head, path_tail} = path_from_binary(index_binary)
 
     case path_head do
-      1 -> hash_function.(proof_head <> _hash_proof(block, path_tail, proof_tail, hash_function))
-      0 -> hash_function.(_hash_proof(block, path_tail, proof_tail, hash_function) <> proof_head)
+      1 -> hash_function.(@node_salt <> proof_head <> _hash_proof(block, path_tail, proof_tail, hash_function))
+      0 -> hash_function.(@node_salt <> _hash_proof(block, path_tail, proof_tail, hash_function) <> proof_head)
     end
   end
 
